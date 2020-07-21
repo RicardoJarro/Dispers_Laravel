@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+use App\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
+});
+Route::get('/api', function () {
+    //return view('welcome');
+    $prod=Product::find(2)->category;
+    $cat=Category::find(1)->products;
+    return $cat;
 });
