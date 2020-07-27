@@ -10,4 +10,8 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function hombre_catagolo(){
+        return view('tienda/plantilla_categoria');
+    }
 }
