@@ -15,6 +15,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'peso'=> $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),// 48.8932,
         'stock'=>$faker->numberBetween($min = 10, $max = 300),
         'precio'=>$faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 100),
-        //'estado'=> '1',
+        'estado'=> '1',
     ];
 });

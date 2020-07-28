@@ -2,6 +2,7 @@
 
 use App\Category;
 use App\Product;
+use App\Image;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,32 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+*/
+
+//pruebas con imagenes
+Route::get('/prueba', function () {
+ 
+    // MEJOR productos create many
+    $imagen=[];
+    $imagen[]['url']='images/tienda/avatar2.png';
+    $imagen[]['url']='images/tienda/avatar1.png';
+
+    $producto=App\Product::find(2);
+    $producto->images()->createMany($imagen);
+    return $producto->images;
+});
+
+
+// Mostrar imagenes
+Route::get('/resultados', function () {
+    $image=App\Image::orderBy('id','Desc')->get();
+    return $image;
+});
+
+/* Mostrar que imagen pertence a x usuario
+    $usuario=App\User::find(1);
+    return $usuario->image;
+    return $usuario->image->url; accede solo ala url
 */
 
 // Route::get('/', function () {
