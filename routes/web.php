@@ -18,15 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 //pruebas con imagenes
 Route::get('/prueba', function () {
- 
-    // MEJOR productos create many
-    $imagen=[];
-    $imagen[]['url']='images/tienda/avatar2.png';
-    $imagen[]['url']='images/tienda/avatar1.png';
+    
+    //eliminar una imagen
 
     $producto=App\Product::find(2);
-    $producto->images()->createMany($imagen);
-    return $producto->images;
+    //$producto->images[0]->delete();//borrar una imagen
+    $producto->images()->delete();//borrar todas
+    return $producto;
 });
 
 
@@ -73,3 +71,7 @@ Route::get('/hombre','Controller@hombre_catagolo');
 // Route::get('/ejemplo', function () {
 //     return view('/tienda/plantilla-categoria');
 // });
+
+/* ------RUTAS QUE YA VAN A QUEDARSE-------- */
+
+//Route::resource('admin/product', 'Admin/AdminProductController')->names('admin.product');
