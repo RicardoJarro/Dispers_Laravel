@@ -74,4 +74,7 @@ Route::get('/hombre','Controller@hombre_catagolo');
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
-//Route::resource('admin/product', 'Admin/AdminProductController')->names('admin.product');
+Route::resource('tienda/plantilla_categoria', 'Admin\AdminProductController')->names('admin.product');
+
+
+

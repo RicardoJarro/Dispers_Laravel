@@ -8,6 +8,8 @@ class User extends Model
 {
     public $incrementing = false;
 
+    protected $fillable = ['name'];
+
     // public function rols(){
     //     return $this->belongsToMany('App\Rol');
     // }
