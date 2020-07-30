@@ -10,8 +10,6 @@
 
 @section('contenido')
 
-
-
 <style type="text/css">
   .table1 {
     width: 100%;
@@ -30,7 +28,7 @@
 <div id="confirmareliminar" class="row">
 
   <span style="display:none;" id="urlbase">{{route('admin.product.index')}}</span>
-  {{-- @include('custom.modal_eliminar') --}}
+  @include('custom.modal_eliminar')
 
     <div class="col-12">
       <div class="card">
@@ -100,7 +98,9 @@
                           </a>
                         </td>
 
-                        <td> <a class="btn btn-danger" 
+                        <td>
+
+                            <a class="btn btn-danger" 
                             href="{{ route('admin.product.index') }}" 
                             v-on:click.prevent="deseas_eliminar({{$producto->id}})"
                             ><i class="fas fa-trash-alt"></i></a>

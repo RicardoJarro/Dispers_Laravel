@@ -1,7 +1,7 @@
 @extends('plantilla.admin')
 
 
-@section('titulo', 'Crear Producto')
+@section('titulo', 'Editar Producto')
 
 @section('breadcrumb')
   <li class="breadcrumb-item"><a href="{{route('admin.product.index')}}">Productos</a></li>
@@ -60,14 +60,7 @@ window.data={
     });
 </script> 
 
-<script>
-    $(document).ready(function() {
-        $('#estado').on('change', function(){
-   this.value = this.checked ? 1 : 0;
-}).change();
-});
-    
-</script>
+
 
 @endsection
 
@@ -78,8 +71,9 @@ window.data={
 <div id="apiproduct">
 
 
-    <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data" >
+    <form action="{{ route('admin.product.update',$producto->id) }}" method="POST" enctype="multipart/form-data" >
 @csrf
+@method('PUT')
 
   <!-- Main content -->
     <section class="content">
@@ -151,7 +145,7 @@ window.data={
                    @blur="getProduct" 
                    @focus = "div_aparecer= false"
                   
-                  class="form-control" type="text" id="nombre" name="nombre" disabled>
+                  class="form-control" type="text" id="nombre" name="nombre" readonly>
 
                   <label>Slug</label>
                   <input 
@@ -330,13 +324,17 @@ window.data={
                       </div> 
                     <br>
                     <div class="form-group">
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox"  class="custom-control-input" id="estado" name="estado" 
-                          @if ($producto->estado=='activo')
-                              checked
-                          @endif>
-                          <label class="custom-control-label" for="estado">Activo</label>
-                        </div>
+                      <label>Estado</label>
+                  <select name="estado" id="estado" class="form-control " style="width: 100%;">
+                    @foreach($estados_productos as $estado)
+                    
+                     @if ($estado == $producto->estado)
+                        <option value="{{ $estado }}" selected="selected">{{ $estado }}</option>
+                     @else
+                        <option value="{{ $estado }}">{{ $estado }}</option>
+                     @endif
+                    @endforeach
+                  </select>
                       </div>                
                   </div>
             </div>

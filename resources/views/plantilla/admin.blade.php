@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Blank Pagge</title>
+  <title>@yield('titulo')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token()}}">
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{!! asset('css/app.css') !!}" rel="stylesheet">
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href={!! asset('adminlte/plugins/fontawesome-free/css/all.min.css') !!}>
    <!-- sweetalert -->
@@ -725,6 +726,37 @@
     <!-- Main content -->
     <section class="content">
 
+      @if( session('datos') )
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('datos') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @endif
+
+      @if( session('cancelar') )
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('cancelar') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      @endif
+
+
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach($errors->all() as $error)
+            <li> {{ $error }} </li>
+
+            @endforeach
+
+          </ul>
+        </div> 
+      @endif
+
         {{-- contenido dinamico, se instancia en los otros archivos como section --}}
       @yield('contenido')
 
@@ -749,6 +781,8 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- Scripts -->
+{{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 <script src="{{asset('js/app_admin.js')}}" defer></script>
 <!-- jQuery -->

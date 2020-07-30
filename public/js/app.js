@@ -49785,7 +49785,7 @@ var apiproduct = new Vue({
           var elemento = document.getElementById('idimagen-' + imagen.id); //console.log(elemento);
 
           elemento.parentNode.removeChild(elemento);
-          Swal.fire('¡Eliminado!', 'Su archivo ha sido eliminado.', 'success');
+          Swal.fire('¡Eliminado!', 'La imagen ha sido eliminada', 'success');
         }
       });
     },
@@ -49853,6 +49853,8 @@ var apiproduct = new Vue({
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./comun */ "./resources/js/comun.js");
+
+__webpack_require__(/*! ./confirmareliminar */ "./resources/js/confirmareliminar.js");
 
 /***/ }),
 
@@ -49997,6 +49999,29 @@ if (document.getElementById('apiproduct')) {
 // if (document.getElementById('api_search_autocomplete')) {
 //     require('./admin/api_search_autocomplete');
 // }
+
+/***/ }),
+
+/***/ "./resources/js/confirmareliminar.js":
+/*!*******************************************!*\
+  !*** ./resources/js/confirmareliminar.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var confirmareliminar = new Vue({
+  el: '#confirmareliminar',
+  data: {
+    urlaeliminar: ''
+  },
+  methods: {
+    deseas_eliminar: function deseas_eliminar(id) {
+      //alert(id);
+      this.urlaeliminar = document.getElementById('urlbase').innerHTML + '/' + id;
+      $('#modal_eliminar').modal('show');
+    }
+  }
+});
 
 /***/ }),
 

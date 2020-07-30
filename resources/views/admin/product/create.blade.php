@@ -37,14 +37,7 @@
   });
 </script> 
 
-<script>
-    $(document).ready(function() {
-        $('#estado').on('change', function(){
-   this.value = this.checked ? 1 : 0;
-}).change();
-});
-    
-</script>
+
 
 @endsection
 
@@ -305,10 +298,18 @@
                       </div> 
                     <br>
                     <div class="form-group">
-                        <div class="custom-control custom-switch">
-                          <input type="checkbox"  class="custom-control-input" id="estado" name="estado" checked>
-                          <label class="custom-control-label" for="estado">Activo</label>
-                        </div>
+                      <label>Estado</label>
+                      <select name="estado" id="estado" class="form-control " style="width: 100%;">
+                        @foreach($estados_productos as $estado)
+                        
+                         @if ($estado == 'Nuevo')
+                            <option value="{{ $estado }}" selected="selected">{{ $estado }}</option>
+                         @else
+                            <option value="{{ $estado }}">{{ $estado }}</option>
+                         @endif
+                        @endforeach
+                      </select>
+
                       </div>                
                   </div>
             </div>
