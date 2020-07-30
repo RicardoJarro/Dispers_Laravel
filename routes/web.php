@@ -16,34 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//pruebas con imagenes
+
+Route::get('/', function () {
+    return view('welcome');
+
+});
+
 Route::get('/prueba', function () {
     
-    //eliminar una imagen
+    $productos=App\Product::with('category','images')->orderBy('id','desc')->get();
+    return $productos;
 
-    $producto=App\Product::find(2);
-    //$producto->images[0]->delete();//borrar una imagen
-    $producto->images()->delete();//borrar todas
-    return $producto;
 });
-
-
-// Mostrar imagenes
-Route::get('/resultados', function () {
-    $image=App\Image::orderBy('id','Desc')->get();
-    return $image;
-});
-
-/* Mostrar que imagen pertence a x usuario
-    $usuario=App\User::find(1);
-    return $usuario->image;
-    return $usuario->image->url; accede solo ala url
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-
-// });
 // Route::get('/api', function () {
 //     //return view('welcome');
 //     $prod=Product::find(2)->category;
@@ -74,7 +58,14 @@ Route::get('/hombre','Controller@hombre_catagolo');
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
-Route::resource('tienda/plantilla_categoria', 'Admin\AdminProductController')->names('admin.product');
+Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
+Route::get('/admin', function () {
+    return view('plantilla.admin');
+});
+
+Route::get('cancelar/{ruta}', function ($ruta) {
+    return redirect()->route('admin.product.index')->with('cancelar','Accion cancelada');
+})->name('cancelar');
 
 

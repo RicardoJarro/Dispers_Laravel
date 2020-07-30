@@ -9,6 +9,9 @@
 
 
 @section('contenido')
+
+
+
 <style type="text/css">
   .table1 {
     width: 100%;
@@ -27,7 +30,8 @@
 <div id="confirmareliminar" class="row">
 
   <span style="display:none;" id="urlbase">{{route('admin.product.index')}}</span>
-  @include('custom.modal_eliminar')
+  {{-- @include('custom.modal_eliminar') --}}
+
     <div class="col-12">
       <div class="card">
         <div class="card-header">
@@ -59,9 +63,11 @@
                 <th>ID</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
-                <th>Estado</th>
+                <th>Precio</th>
+                <th>Stock</th>
                 <th>Activo</th>
-                <th>Slider Principal</th>
+                <th>Creado</th>
+                <th>Categoria</th>                
                 <th colspan="3"></th>
               </tr>
             </thead>
@@ -72,38 +78,36 @@
                         <td> {{$producto->id }} </td>
                         <td>  
                            @if ($producto->images->count()<=0 )
-                              <img style="height: 100px;    width: 100px;" src="/imagenes/avatar.png" class="rounded-circle">
+                              <img style="height: 100px;    width: 100px;" src="/images/admin/noImagen.png" class="rounded-circle">
                            @else
                               <img style="height: 100px;    width: 100px;" src="{{ $producto->images->random()->url }}" class="rounded-circle">   
                            @endif
-
-                          
-
-
                         </td>
                         <td> {{$producto->nombre }} </td>
+                        <td> $ {{$producto->precio }} </td>
+                        <td>{{$producto->stock }} </td>
                         <td> {{$producto->estado }} </td>
-                        <td> {{$producto->activo }} </td>
-                        <td> {{$producto->sliderprincipal }} </td>
+                        <td> {{$producto->created_at }} </td>
+                        <td> {{$producto->category->nombre }} </td>
 
                         <td> <a class="btn btn-default"  
-                            href="{{ route('admin.product.show',$producto->slug) }}">Ver</a>
+                            href="{{ route('admin.product.show',$producto->slug) }}"><i class="fa fa-eye" aria-hidden="true"></i>
+                          </a>
                         </td>
 
                         <td> <a class="btn btn-info" 
-                            href="{{ route('admin.product.edit',$producto->slug) }}">Editar</a>
+                            href="{{ route('admin.product.edit',$producto->slug) }}"><i class="far fa-edit"></i>
+                          </a>
                         </td>
 
                         <td> <a class="btn btn-danger" 
                             href="{{ route('admin.product.index') }}" 
                             v-on:click.prevent="deseas_eliminar({{$producto->id}})"
-                            >Eliminar</a>
+                            ><i class="fas fa-trash-alt"></i></a>
                         </td>
                         
                     </tr>
-                @endforeach
-             
-              
+                @endforeach                           
             </tbody>
           </table>
           {{ $productos->appends($_GET)->links() }}

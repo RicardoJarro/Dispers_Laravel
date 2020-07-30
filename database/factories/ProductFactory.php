@@ -5,11 +5,13 @@
 use App\Model;
 use App\Product;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Product::class, function (Faker $faker) {
+    $nombre=$faker->userName;
     return [
-        'nombre' => $faker->userName,
-        'slug' => $faker->userName,
+        'nombre' => $nombre,
+        'slug' => Str::slug($nombre),
         'category_id' =>$faker->numberBetween($min = 1, $max = 4),
         'descripcion'=> $faker->text($maxNbChars = 200),
         'peso'=> $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),// 48.8932,

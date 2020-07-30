@@ -49718,6 +49718,126 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/apiproduct.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/apiproduct.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var apiproduct = new Vue({
+  el: '#apiproduct',
+  data: {
+    nombre: '',
+    slug: '',
+    div_mensajeslug: 'Slug Existe',
+    div_clase_slug: 'badge badge-danger',
+    div_aparecer: false,
+    deshabilitar_boton: 1,
+    //variables de precios
+    precio: 0,
+    peso: 0
+  },
+  computed: {
+    generarSLug: function generarSLug() {
+      var _char = {
+        "á": "a",
+        "é": "e",
+        "í": "i",
+        "ó": "o",
+        "ú": "u",
+        "Á": "A",
+        "É": "E",
+        "Í": "I",
+        "Ó": "O",
+        "Ú": "U",
+        "ñ": "n",
+        "Ñ": "N",
+        " ": "-",
+        "_": "-"
+      };
+      var expr = /[áéíóúÁÉÍÓÚÑñ_ ]/g;
+      this.slug = this.nombre.trim().replace(expr, function (e) {
+        return _char[e];
+      }).toLowerCase();
+      return this.slug; //return this.nombre.trim().replace(/ /g,'-').toLowerCase()
+    }
+  },
+  methods: {
+    eliminarimagen: function eliminarimagen(imagen) {
+      //console.log(imagen);
+      Swal.fire({
+        title: '¿Estas seguro de eliminar la imagen ' + imagen.id + '?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, Eliminar!',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          var url = '/api/eliminarimagen/' + imagen.id;
+          axios["delete"](url).then(function (response) {
+            console.log(response.data);
+          }); //eliminar el elemento
+
+          var elemento = document.getElementById('idimagen-' + imagen.id); //console.log(elemento);
+
+          elemento.parentNode.removeChild(elemento);
+          Swal.fire('¡Eliminado!', 'Su archivo ha sido eliminado.', 'success');
+        }
+      });
+    },
+    getProduct: function getProduct() {
+      var _this = this;
+
+      if (this.slug) {
+        var url = '/api/product/' + this.slug;
+        axios.get(url).then(function (response) {
+          _this.div_mensajeslug = response.data;
+
+          if (_this.div_mensajeslug === "Slug Disponible") {
+            _this.div_clase_slug = 'badge badge-success';
+            _this.deshabilitar_boton = 0;
+          } else {
+            _this.div_clase_slug = 'badge badge-danger';
+            _this.deshabilitar_boton = 1;
+          }
+
+          _this.div_aparecer = true;
+
+          if (data.datos.nombre) {
+            if (data.datos.nombre === _this.nombre) {
+              _this.deshabilitar_boton = 0;
+              _this.div_mensajeslug = '';
+              _this.div_clase_slug = '';
+              _this.div_aparecer = false;
+            }
+          }
+        });
+      } else {
+        this.div_clase_slug = 'badge badge-danger';
+        this.div_mensajeslug = "Debes escribir un producto";
+        this.deshabilitar_boton = 1;
+        this.div_aparecer = true;
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (data.editar == 'si') {
+      this.nombre = data.datos.nombre;
+      this.precio = data.datos.precio;
+      this.peso = data.datos.peso;
+      this.deshabilitar_boton = 0;
+    }
+
+    console.log(data);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -49732,27 +49852,7 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-var app = new Vue({
-  el: '#app'
-});
+__webpack_require__(/*! ./comun */ "./resources/js/comun.js");
 
 /***/ }),
 
@@ -49867,6 +49967,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/comun.js":
+/*!*******************************!*\
+  !*** ./resources/js/comun.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+
+if (document.getElementById('app')) {
+  var app = new Vue({
+    el: '#app'
+  });
+} // if (document.getElementById('apicategory')) {
+//     require('./admin/apicategory');
+// }
+
+
+if (document.getElementById('apiproduct')) {
+  __webpack_require__(/*! ./admin/apiproduct */ "./resources/js/admin/apiproduct.js");
+} // if (document.getElementById('confirmareliminar')) {
+//     require('./confirmareliminar');
+// }
+// if (document.getElementById('api_search_autocomplete')) {
+//     require('./admin/api_search_autocomplete');
+// }
 
 /***/ }),
 
