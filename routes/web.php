@@ -3,6 +3,7 @@
 use App\Category;
 use App\Product;
 use App\Image;
+use App\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +49,7 @@ Route::get('/prueba', function () {
 
 // });
 
-Route::get('user/{id}', 'UserController@index')->name('nombredelaruta');
+// Route::get('user/{id}', 'Admin\AdminUserController@index')->name('nombredelaruta');
 
 Route::get('/hombre','Controller@hombre_catagolo');
 
@@ -58,15 +59,42 @@ Route::get('/hombre','Controller@hombre_catagolo');
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
+/* ----Manejo de usuarios------- */
+
+// Route::get('/admin/usuarios', function () {
+//     return view('admin.user.index');
+// });
+
+Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
+
+//para obtener todas las rutas del usuario
+Route::resource('admin/user','Admin\AdminUserController')->names('admin.user');
+
+/* ----Admin Categoria----- */
+
+
+Route::get('/admin', function () {
+    return view('admin.system.admin_home');
+})->name('admin');
+
+Route::get('/admin/acerca_de', function () {
+    return view('admin.system.acerca_de');
+});
+
+
+Route::resource('admin/category', 'Admin\AdminCategoryController')->names('admin.category');
+
+
+
 /* ---Admin Producto----- */
 Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
-Route::get('/admin', function () {
-    return view('plantilla.admin');
-});
+// Route::get('/admin', function () {
+//     return view('plantilla.admin');
+// });
 
 Route::get('cancelar/{ruta}', function ($ruta) {
-    return redirect()->route('admin.product.index')->with('cancelar','Accion cancelada');
+    return redirect()->route($ruta)->with('cancelar','Accion cancelada');
 })->name('cancelar');
 
 /* ----TiendaCategorias----*/
@@ -75,3 +103,7 @@ Route::get('cancelar/{ruta}', function ($ruta) {
 // });
 
 Route::resource('categoria/{slug}', 'Tienda\TiendaController')->names('tienda.categoria.index');
+
+// Route::get('/tienda', function () {
+//     return view('tienda.usuario.perfil');
+// });

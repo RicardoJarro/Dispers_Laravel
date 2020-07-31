@@ -1,5 +1,4 @@
-@extends('plantilla.admin')
-
+@extends('admin.system.admin')
 
 @section('titulo', 'Editar Producto')
 

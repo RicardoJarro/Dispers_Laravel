@@ -1,22 +1,23 @@
 @extends('tienda/plantilla_general')
 
-@section('titulo','Categorias')
-
+@section('titulo',$nombre)
 
 @section('contenido')
-
 
         <div class="row">
             <!-- MENU LATERAL -->
             <div class="col-xs-12 col-sm-4 col-md-2  contenedor-menu">
+
+
                 <a href="#" class="btn-menu p-2 w-100">Menu<i class="icono fas fa-bars"></i></a>
                 <ul class="menu ">
                     <li><a href="#">Inicio</a></li>
+                    
                     <li id="cat-ropa"><a href="#">Ropa<i class="icono derecha fas fa-chevron-down"></i></a>
-                        <ul>
-                            <li id="cat-ropa-mujer"><a href="catalogo_mujer.php">Mujer</a></li>
-                            <li id="cat-ropa-hombre"><a href="catalogo_hombre.php">Hombre</a></li>
-                            <li id="cat-ropa-ninos"><a href="catalogo_ninos.php">Niños y niñas</a></li>
+                        <ul>                            
+                            @foreach ($categorias_ropa as $categoria)
+                            <li id="cat-ropa-mujer"><a href="catalogo_mujer.php">{{$categoria->nombre }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li id="cat-accesorios"><a href="#">Accesorios<i class="icono derecha fas fa-chevron-down"></i></a>

@@ -14576,6 +14576,94 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/js/admin/apicategory.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/apicategory.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var apicategory = new Vue({
+  el: '#apicategory',
+  data: {
+    nombre: '',
+    slug: '',
+    div_mensajeslug: 'Slug Existe',
+    div_clase_slug: 'badge badge-danger',
+    div_aparecer: false,
+    deshabilitar_boton: 1
+  },
+  computed: {
+    generarSLug: function generarSLug() {
+      var _char = {
+        "á": "a",
+        "é": "e",
+        "í": "i",
+        "ó": "o",
+        "ú": "u",
+        "Á": "A",
+        "É": "E",
+        "Í": "I",
+        "Ó": "O",
+        "Ú": "U",
+        "ñ": "n",
+        "Ñ": "N",
+        " ": "-",
+        "_": "-"
+      };
+      var expr = /[áéíóúÁÉÍÓÚÑñ_ ]/g;
+      this.slug = this.nombre.trim().replace(expr, function (e) {
+        return _char[e];
+      }).toLowerCase();
+      return this.slug; //return this.nombre.trim().replace(/ /g,'-').toLowerCase()
+    }
+  },
+  methods: {
+    getCategory: function getCategory() {
+      var _this = this;
+
+      if (this.slug) {
+        var url = '/api/category/' + this.slug;
+        axios.get(url).then(function (response) {
+          _this.div_mensajeslug = response.data;
+
+          if (_this.div_mensajeslug === "Slug Disponible") {
+            _this.div_clase_slug = 'badge badge-success';
+            _this.deshabilitar_boton = 0;
+          } else {
+            _this.div_clase_slug = 'badge badge-danger';
+            _this.deshabilitar_boton = 1;
+          }
+
+          _this.div_aparecer = true;
+
+          if (document.getElementById('editar')) {
+            if (document.getElementById('nombretemp').innerHTML === _this.nombre) {
+              _this.deshabilitar_boton = 0;
+              _this.div_mensajeslug = '';
+              _this.div_clase_slug = '';
+              _this.div_aparecer = false;
+            }
+          }
+        });
+      } else {
+        this.div_clase_slug = 'badge badge-danger';
+        this.div_mensajeslug = "Debes escribir una categoria";
+        this.deshabilitar_boton = 1;
+        this.div_aparecer = true;
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (document.getElementById('editar')) {
+      this.nombre = document.getElementById('nombretemp').innerHTML;
+      this.deshabilitar_boton = 0;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/apiproduct.js":
 /*!******************************************!*\
   !*** ./resources/js/admin/apiproduct.js ***!
@@ -14795,17 +14883,19 @@ if (document.getElementById('app')) {
   var app = new Vue({
     el: '#app'
   });
-} // if (document.getElementById('apicategory')) {
-//     require('./admin/apicategory');
-// }
+}
 
+if (document.getElementById('apicategory')) {
+  __webpack_require__(/*! ./admin/apicategory */ "./resources/js/admin/apicategory.js");
+}
 
 if (document.getElementById('apiproduct')) {
   __webpack_require__(/*! ./admin/apiproduct */ "./resources/js/admin/apiproduct.js");
-} // if (document.getElementById('confirmareliminar')) {
-//     require('./confirmareliminar');
-// }
-// if (document.getElementById('api_search_autocomplete')) {
+}
+
+if (document.getElementById('confirmareliminar')) {
+  __webpack_require__(/*! ./confirmareliminar */ "./resources/js/confirmareliminar.js");
+} // if (document.getElementById('api_search_autocomplete')) {
 //     require('./admin/api_search_autocomplete');
 // }
 
