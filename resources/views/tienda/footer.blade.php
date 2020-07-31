@@ -29,9 +29,8 @@
                             <li><a href="catalogo_gorras.php">Accesorios</a></li>
                             <li><a href="catalogo_articulos_tazas.php">Articulos del Hogar</a></li>
                         </ul>
-                
+                    </div>
                 </div>
-
                 <div class="col-md-4 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">Atención al cliente</h3>
@@ -43,6 +42,10 @@
                         </ul>
                     </div>
                 </div>
+
+                
+
+                
 
             </div>
             <!-- /row -->

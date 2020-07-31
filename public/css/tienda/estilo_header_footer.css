@@ -455,8 +455,8 @@ textarea.input {
 \*----------------------------*/
 
 #header {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   background-color: #15161D;
 }
 
@@ -473,7 +473,10 @@ textarea.input {
 \*----------------------------*/
 
 .header-search {
-  padding: 15px 0px;
+  padding-top: 10px;
+  padding-right: 2px;
+  padding-left:2px ;
+  padding-bottom: 0px;
 }
 
 .header-search form {
@@ -520,7 +523,8 @@ textarea.input {
 
 .header-ctn {
   float: right;
-  padding: 15px 0px;
+  padding: 5px 0px;
+  padding-top: 10px;
 }
 
 .header-ctn>div {
@@ -2037,7 +2041,7 @@ textarea.input {
 }
 
 .footer {
-  margin: 30px 0px;
+  margin: 0px 0px;
 }
 
 .footer .footer-title {
@@ -2048,7 +2052,7 @@ textarea.input {
 }
 
 .footer-links li+li {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .footer-links li a {
@@ -2056,7 +2060,7 @@ textarea.input {
 }
 
 .footer-links li i {
-  margin-right: 15px;
+  margin-right: 10px;
   color: #D10024;
   width: 14px;
   text-align: center;

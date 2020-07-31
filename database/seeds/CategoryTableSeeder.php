@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 class CategoryTableSeeder extends Seeder
 {
     /**
@@ -22,7 +22,7 @@ class CategoryTableSeeder extends Seeder
         foreach($categories as $key => $value){
             DB::table('categories')->insert([
                 'nombre'=> $value,
-                'slug'=>$value,
+                'slug'=>Str::slug($value),
                 'descripcion'=>'esto es una descripcion',
                 'created_at'=>Carbon::now()->format('Y-m-d H:i:s')
             ]);

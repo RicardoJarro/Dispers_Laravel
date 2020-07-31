@@ -3,6 +3,7 @@
 <head>
 @include('tienda/header_estilos')
 </head>
+@yield('estilos')
 <body>
     <header>
         <!-- TOP HEADER -->
@@ -39,10 +40,12 @@
         <!-- MAIN HEADER -->
         
     </header>
-    <div class="container">
+    <div class="container-fluid">
         @yield('contenido')
     </div>
 
+    <div>
     @include('tienda/footer')
+    </div>
 </body>
 </html>

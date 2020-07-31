@@ -7,7 +7,7 @@
             <!-- LOGO -->
             <div class="col-lg-3">
                 <div class="header-logo"> <a href="index.html" class="logo">
-                        <img src="images/tienda/logo.png" alt="" width="220" height="60">                                
+                        <img src="/images/tienda/logo.png" alt="" width="220" height="60">                                
                     </a>
                 </div>
             </div>

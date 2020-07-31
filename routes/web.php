@@ -58,6 +58,7 @@ Route::get('/hombre','Controller@hombre_catagolo');
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
+/* ---Admin Producto----- */
 Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
 Route::get('/admin', function () {
@@ -68,4 +69,9 @@ Route::get('cancelar/{ruta}', function ($ruta) {
     return redirect()->route('admin.product.index')->with('cancelar','Accion cancelada');
 })->name('cancelar');
 
+/* ----TiendaCategorias----*/
+// Route::get('/categoria/{slug}', function ($slug) {
+//     return view('/tienda/plantilla_categoria')->name('categoria.hombre');
+// });
 
+Route::resource('categoria/{slug}', 'Tienda\TiendaController')->names('tienda.categoria.index');

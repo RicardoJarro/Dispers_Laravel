@@ -1,12 +1,14 @@
 @extends('tienda/plantilla_general')
 
 @section('titulo','Categorias')
+
+
 @section('contenido')
-<div class="section">
-    <div class="container-fluid">
-        <div class="row position-relative">
+
+
+        <div class="row">
             <!-- MENU LATERAL -->
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 contenedor-menu m-0 pt-0 d-inline-block">
+            <div class="col-xs-12 col-sm-4 col-md-2  contenedor-menu">
                 <a href="#" class="btn-menu p-2 w-100">Menu<i class="icono fas fa-bars"></i></a>
                 <ul class="menu ">
                     <li><a href="#">Inicio</a></li>
@@ -39,71 +41,32 @@
             <!-- MENU LATERAL -->
 
             <!-- CATALOGO DE PRODUCTOS -->
-            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 d-inline-block contenedor-catalogo m-0 p-0">
-                <div class="w-100">
+            <div class="col-xs-12 col-sm-8 col-md-10  contenedor-catalogo">
+                
+                @foreach($productos as $item)                
+                
+                <div class="w-100 d-inline">
                     <div class="product-catalog">
                         <a href="producto.php">
-                            <img src="images/camisa-tiburon_1_blanco.jpg">
+                            @if(!$item->images->isEmpty())
+                            <img src={{$item->images[0]->url}}>
+                            @else
+                            <img src="/images/admin/noImagen.png">
+                            @endif                                                        
                             <div class="product-catalog-info">
-                                <p id="nombre">CAMISETA TIBURON</p>
-                                <p id="precio">19.99 $</p>
+                                <p id="nombre">{{$item->nombre}}aqui</p>
+                            <p id="precio"> $ {{$item->precio}}</p>
                             </div>
                         </a>
-                    </div>
-
-                    <div class="product-catalog mano">
-                        <a href="producto.php">
-                            <img src="images/camisa-rubik_1_negro.jpg">
-                            <div class="product-catalog-info">
-                                <p id="nombre">CAMISETA CUBO RUBIK</p>
-                                <p id="precio">19.99 $</p>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <div class="product-catalog mano">
-                        <a href="producto.php">
-                            <img src="images/camisa-motivacion1_1_negro.jpg">
-                            <div class="product-catalog-info">
-                                <p id="nombre">CAMISETA MOTIVACION</p>
-                                <p id="precio">19.99 $</p>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <div class="product-catalog mano">
-                        <a href="producto.php">
-                            <img src="images/camisa-foco_1_blanco.jpg">
-                            <div class="product-catalog-info">
-                                <p id="nombre">CAMISETA FOCO</p>
-                                <p id="precio">19.99 $</p>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <div class="product-catalog">
-                        <img src="http://localhost:8099/dispers/2-home_default/hummingbird-printed-t-shirt.jpg">
-                        <div class="product-catalog-info">
-                            <p id="nombre">CAMISETA CON COLIBRI</p>
-                            <p id="precio">19.99 $</p>
-                        </div>
-                    </div>
-                    <div class="product-catalog">
-                        <img src="http://localhost:8099/dispers/2-home_default/hummingbird-printed-t-shirt.jpg">
-                        <div class="product-catalog-info">
-                            <p id="nombre">CAMISETA CON COLIBRI</p>
-                            <p id="precio">19.99 $</p>
-                        </div>
                     </div>
                 </div>
+                @endforeach
+                {{ $productos->appends($_GET)->links() }}
             </div>
             <!-- CATALOGO DE PRODUCTOS -->
+            
         </div>
-    </div>
-</div>
+
 @endsection
 @section('addScript')
 <script>
