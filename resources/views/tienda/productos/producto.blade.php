@@ -1,19 +1,12 @@
-<html lang="en">
+@extends('tienda/system/plantilla_general')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto</title>
+@section('titulo',$producto->nombre)
 
-    <link rel="stylesheet" href="http://dispers.test/dispers/css/estilo_producto.css">
+@section('estilos')
+<link rel="stylesheet" href="{!! asset('css/tienda/estilo_producto.css')!!}">
+@endsection
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/63fafe2dae.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <!-- Incluimos el header, con esto tambien se incluyen todas las librerias -->
-    @include('tienda.system.header')
+@section('contenido')
 
     <div class="section">
         <!-- ventana flotante cuando se pulsa agregar carrito -->
@@ -44,27 +37,48 @@
 
             <div class="row">
                 <div class="col col-12 col-sm-12 col-md-7 col-lg-6 container-imagenes-min">
+
+                    @if(!$producto->images->isEmpty())
+
+                        <div class="producto-imagen-grande zoom">
+                            <img src={{$producto->images[0]->url}} alt="" class="zoom img-responsive" id="img-grande">
+                        </div>
+                        
+                        <div id="lista-imagenes">
+                            @foreach ($producto->images as $image)
+                            
+                            @if ($loop->first)                            
+                        <img src="{{$image->url}}" alt="" class="miniatura activado mano" id="img-{{$var}}">                        
+
+                            @else
+                                <img src="{{$image->url}}" alt="" class="miniatura mano" id="img-{{$var}}" >
+                            @endif
+                            <span style="display: none">{{++$var}}</span>
+                           
+                            @endforeach
+                        </div>
+    
+                        
+                        
+                    @else                            
                     <div class="producto-imagen-grande zoom">
-                        <img src="http://dispers.test/dispers/images/camisa-tiburon_1_blanco.jpg" alt="" class="zoom img-responsive" id="img-grande">
+                        <img src="/images/admin/noImagen.png" alt="" class="zoom img-responsive" id="img-grande">
                     </div>
-
                     <div id="lista-imagenes">
-                        <img src="http://dispers.test/dispers/images/camisa-tiburon_1_blanco.jpg" id="img-1" class="miniatura activado mano">
-                        <img src="http://dispers.test/dispers/images/camisa-tiburon_2_blanco.jpg" id="img-2" class="miniatura mano">
-                        <img src="http://dispers.test/dispers/images/camisa-tiburon_3_blanco.jpg" id="img-3" class="miniatura mano">
                     </div>
-
+                    @endif                 
                 </div>
                 <div class="col col-12 col-sm-12 col-md-5 col-lg-6 container-info">
+                    <br>
                     <div id="deter-producto-nombre">
-                        <h3>Camiseta Baby Shark</h3>
+                    <h3>{{$producto->nombre}}</h3>
                     </div>
                     <div id="deter-producto-descripcion">
-                        Camiseta con estampado de tiburon, daddy shark
+                        {{$producto->descripcion}}
                     </div>
                     <br>
                     <div id="deter-producto-precio">
-                        <h3>19.99 $</h3>
+                        <h3>{{$producto->precio}} $</h3>
                     </div>
                     <br>
                     <h5>Color</h5>
@@ -93,99 +107,44 @@
                     </div>
                     <br>
                     <button type="button" id="añadir-carrito" class="btn btn-danger d-block" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
-
                 </div>
-
-
             </div>
+
+            {{-- PRODUCTOS SIMILARES --}}
 
             <div class="similar-product">
+                <br>
                 <h4>Productos similares</h4>
-
                 <div class="slider-items">
 
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-rubik_1_negro.jpg" alt="" class="img-product-recommend">
+                    @foreach ($productosRelacionados as $item)
+                    <a href="{{ url('producto/'.$item->slug) }}">
+                    <div class="item-recommend d-inline-block">                        
+                        @if (!$item->images->isEmpty())
+                        <img src="{{$item->images[0]->url}}" alt="" class="img-product-recommend">
+                        @else
+                        <img src="/images/admin/noImagen.png" alt="" class="img-product-recommend">
+                        @endif                        
                         <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta Rubik hombre</h5>
+                            <h5>{{$item->nombre}}</h5>
                         </div>
                         <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
-
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-foco_1_blanco.jpg" alt="" class="img-product-recommend">
-                        <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta foco hombre</h5>
-                        </div>
-                        <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-motivacion1_1_negro.jpg" alt="" class="img-product-recommend">
-                        <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta frase hombre</h5>
-                        </div>
-                        <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-rubik_1_negro.jpg" alt="" class="img-product-recommend">
-                        <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta Rubik hombre</h5>
-                        </div>
-                        <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
-
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-rubik_1_negro.jpg" alt="" class="img-product-recommend">
-                        <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta Rubik hombre</h5>
-                        </div>
-                        <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
-
-                    <div class="item-recommend d-inline-block mano">
-                        <img src="http://dispers.test/dispers/images/camisa-rubik_1_negro.jpg" alt="" class="img-product-recommend">
-                        <div class="article__name" title="Camiseta hombre">
-                            <h5>Camiseta Rubik hombre</h5>
-                        </div>
-                        <div class="price__now-price">
-                            <h5>19.99$</h5>
-                        </div>
-                    </div>
+                        <h5> $ {{$item->precio}}</h5>
+                        </div>                        
+                    </div>    
+                </a>                    
+                    @endforeach                   
                 </div>
             </div>
-
-
-
         </div>
     </div>
-    </div>
-    </div>
-    </div>
+    
 
-    <!-- Incluimos el footer, con esto tambien se incluyen todas las librerias -->
-    @include('tienda.system.footer')
+    @endsection
     <!-- LIBRERIAS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    @section('addScript')
 
-    <!-- <script src="http://dispers.test/dispers/js/popper.min.js"></script> -->
-    <!-- <script src="http://dispers.test/dispers/js/bootstrap.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.js"></script>
-    <!-- FIN-->
-
-
     <!-- Para el efecto zoom sobre la imagen -->
     <script>
         // Este script intercambia las imagenes y hace el efecto zoom
@@ -210,23 +169,23 @@
                 });
             });
 
-            $(function() {
-                $('.boton-color').click(function() {
-                    var colorR = $(this).attr('class').split(/\s+/);
-                    colorReq = colorR[1];
-                    var ubicacion = $('#img-grande').attr('src').split("_");
-                    $('#img-grande').attr('src', ubicacion[0] + "_" + ubicacion[1] + "_" + colorR[1] + ".jpg");
-                    $('#img-1').attr('src', ubicacion[0] + "_1_" + colorR[1] + ".jpg");
-                    $('#img-2').attr('src', ubicacion[0] + "_2_" + colorR[1] + ".jpg");
-                    $('#img-3').attr('src', ubicacion[0] + "_3_" + colorR[1] + ".jpg");
+            // $(function() {
+            //     $('.boton-color').click(function() {
+            //         var colorR = $(this).attr('class').split(/\s+/);
+            //         colorReq = colorR[1];
+            //         var ubicacion = $('#img-grande').attr('src').split("_");
+            //         $('#img-grande').attr('src', ubicacion[0] + "_" + ubicacion[1] + "_" + colorR[1] + ".jpg");
+            //         $('#img-1').attr('src', ubicacion[0] + "_1_" + colorR[1] + ".jpg");
+            //         $('#img-2').attr('src', ubicacion[0] + "_2_" + colorR[1] + ".jpg");
+            //         $('#img-3').attr('src', ubicacion[0] + "_3_" + colorR[1] + ".jpg");
 
-                    $('.producto-imagen-grande').zoom({
-                        url: ubicacion[0] + "_" + ubicacion[1] + "_" + colorR[1] + ".jpg",
-                        magnify: 1.5
-                    });
+            //         $('.producto-imagen-grande').zoom({
+            //             url: ubicacion[0] + "_" + ubicacion[1] + "_" + colorR[1] + ".jpg",
+            //             magnify: 1.5
+            //         });
 
-                });
-            });
+            //     });
+            // });
 
             $(function() {
                 var tallas = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -259,9 +218,4 @@
 
         });
     </script>
-
-</body>
-
-
-
-</html>
+@endsection

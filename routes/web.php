@@ -70,6 +70,9 @@ Route::get('/admin/acerca_de', function () {
 Route::resource('admin/user','Admin\AdminUserController')->names('admin.user');
 Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
 
+Route::resource('usuario','Tienda\UserController')->names('tienda.user');
+
+
 /* ----Admin Categoria----- */
 
 Route::resource('admin/general_category', 'Admin\AdminGeneralCategoryController')->names('admin.general_category');
@@ -78,21 +81,14 @@ Route::resource('admin/category', 'Admin\AdminCategoryController')->names('admin
 /* ---Admin Producto----- */
 Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
-// Route::get('/admin', function () {
-//     return view('plantilla.admin');
-// });
-
 Route::get('cancelar/{ruta}', function ($ruta) {
     return redirect()->route($ruta)->with('cancelar','Accion cancelada');
 })->name('cancelar');
 
-/* ----TiendaCategorias----*/
-// Route::get('/categoria/{slug}', function ($slug) {
-//     return view('/tienda/plantilla_categoria')->name('categoria.hombre');
-// });
+/* ----Tienda Categorias----*/
 
 Route::get('categoria/{category_slug}/{subcategory_slug?}', 'Tienda\CategoryController@index')->name('tienda.categoria');
 
-// Route::get('/tienda', function () {
-//     return view('tienda.usuario.perfil');
-// });
+/* -----Tienda Producto Especifico */
+
+Route::get('producto/{producto_slug}', 'Tienda\TiendaController@producto')->name('tienda.prodcuto');

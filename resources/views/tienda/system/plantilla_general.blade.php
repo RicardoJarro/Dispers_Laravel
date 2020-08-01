@@ -2,8 +2,9 @@
 
 <head>
 @include('tienda/system/header_estilos_scripts')
-</head>
 @yield('estilos')
+</head>
+
 <body>
     <header>
         @include('tienda/system/header')

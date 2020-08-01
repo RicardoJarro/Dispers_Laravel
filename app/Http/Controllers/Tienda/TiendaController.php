@@ -9,16 +9,13 @@ use Illuminate\Http\Request;
 
 class TiendaController extends Controller
 {
-    public function index($slug)
+
+    //muestra un producto especifico
+    public function producto($slug)
     {
-        $categoria=Category::where('slug',$slug)->firstOrFail();
-        $productos=Product::with('images')->where('category_id',$categoria->id)->orderBy('nombre')->paginate(9);
-        $nombre=$categoria->nombre;
-
-        $categorias_ropa=Category::where('slug','like',"%ropa%")->get();
-        $categorias_otras=Category::where('slug','not like',"%ropa%")->get();
-       
-
-        return view('tienda.plantilla_categoria',compact('productos','nombre','categorias_ropa','categorias_otras'));
+        $producto=Product::with('category.general_category','images')->where('slug',$slug)->firstOrFail();
+        $var=1;        
+        $productosRelacionados=Product::with('images')->where('category_id',$producto->category->id)->inRandomOrder()->limit(7)->get();
+        return view('tienda.productos.producto',compact('producto','var','productosRelacionados'));
     }
 }
