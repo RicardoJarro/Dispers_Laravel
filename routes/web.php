@@ -25,8 +25,8 @@ Route::get('/', function () {
 
 Route::get('/prueba', function () {
     
-    $productos=App\Product::with('category','images')->orderBy('id','desc')->get();
-    return $productos;
+   
+    return view('tienda/categorias/plantilla_categoria');
 
 });
 
@@ -75,12 +75,6 @@ Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
 Route::resource('admin/general_category', 'Admin\AdminGeneralCategoryController')->names('admin.general_category');
 Route::resource('admin/category', 'Admin\AdminCategoryController')->names('admin.category');
 
-
-
-
-
-
-
 /* ---Admin Producto----- */
 Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
@@ -97,7 +91,7 @@ Route::get('cancelar/{ruta}', function ($ruta) {
 //     return view('/tienda/plantilla_categoria')->name('categoria.hombre');
 // });
 
-Route::resource('categoria/{slug}', 'Tienda\TiendaController')->names('tienda.categoria.index');
+Route::get('categoria/{category_slug}/{subcategory_slug?}', 'Tienda\CategoryController@index')->name('tienda.categoria');
 
 // Route::get('/tienda', function () {
 //     return view('tienda.usuario.perfil');

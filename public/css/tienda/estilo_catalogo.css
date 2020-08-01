@@ -119,12 +119,11 @@ padding-top: 20px;
     margin-left: 10px;
 } 
 
-.contenedor-menu .menu ul {
-    /* display: none;  */
-}
+
 
 .contenedor-menu .menu ul li>a{
-    background: #f2f2f2;
+    padding-left: 30px;
+    background: #ffffff;
     color: #D10024;
 }
 
