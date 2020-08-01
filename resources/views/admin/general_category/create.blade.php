@@ -1,18 +1,18 @@
 @extends('admin.system.admin')
-@section('titulo','Crear Subcategoria')
+@section('titulo','Crear Categoria')
 @section('breadcrumb')
-  <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">Categorías</a></li>
+  <li class="breadcrumb-item"><a href="{{route('admin.general_category.index')}}">Categorías</a></li>
   <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 
 @section('contenido')
-<div id="apicategory">
-  <form action="{{ route('admin.category.store') }}" method="POST">
+<div id="apigeneralcategory">
+  <form action="{{ route('admin.general_category.store') }}" method="POST">
     @csrf
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Administracion de Subategoria</h3>
+    <h3 class="card-title">Administracion de Categoria</h3>
 
     <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -36,14 +36,6 @@
                       @{{ div_mensajeslug }}
                     </div>
                     <br v-if="div_aparecer">
-
-                    <label for="general_category_id">Categoria principal</label>
-                    <select class="form-control" name="general_category_id" id="general_category_id">
-                      @foreach ($principales as $cat)
-                          <option value={{$cat->id}}>{{$cat->nombre}}</option>
-                      @endforeach
-
-                    </select>
                     <label for="descripcion">Descripción</label>
                     <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="5"></textarea>
                     
@@ -52,7 +44,7 @@
               <!-- /.card-body -->
               <div class="card-footer">
       
-                <a class="btn btn-danger" href="{{ route('cancelar','admin.category.index') }}">Cancelar</a>
+                <a class="btn btn-danger" href="{{ route('cancelar','admin.general_category.index') }}">Cancelar</a>
       
       
                           <input 

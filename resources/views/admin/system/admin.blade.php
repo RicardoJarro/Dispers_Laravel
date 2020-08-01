@@ -119,6 +119,7 @@
                with font-awesome or any other icon font library -->
          
           <li class="nav-header">Administración</li>
+
           <!-- Categorías -->
                <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
@@ -130,17 +131,31 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ route('admin.category.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon text-info"></i>
-                      <p>Lista de Categorías</p>
+                    <a href="{{ route('admin.general_category.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon text-warning"></i>
+                      <p>Crear Categoria</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('admin.category.create')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon text-warning"></i>
-                      <p>Crear categoría</p>
+                    <a href="{{ route('admin.general_category.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon text-info"></i>
+                      <p>Lista de Categorias</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{ route('admin.category.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon text-warning"></i>
+                      <p>Crear Subcategoría</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('admin.category.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon text-info"></i>
+                      <p>Lista de Subcategorías</p>
+                    </a>
+                  </li>
+                  
                  
                 </ul>
               </li>

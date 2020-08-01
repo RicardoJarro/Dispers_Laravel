@@ -1,5 +1,5 @@
 @extends('admin.system.admin')
-@section('titulo', 'Administración de Subcategorías')
+@section('titulo', 'Administración de Categorías')
 
 @section('breadcrumb')
   <li class="breadcrumb-item active">@yield('titulo')</li>
@@ -9,9 +9,9 @@
 @section('contenido')
 
 
-
 <div id="confirmareliminar" class="row">
-  <span style="display:none;" id="urlbase">{{route('admin.category.index')}}</span>
+  <span style="display:none;" id="urlbase">{{route('admin.general_category.index')}}</span>
+  <span style="display:none;" id="urlbase2">{{route('admin.category.index')}}</span>
   @include('custom.modal_eliminar')
     <div class="col-12">
       <div class="card">
@@ -36,8 +36,8 @@
           </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 550px;">
-                <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.category.create') }}">Crear</a>
+        <div class="card-body table-responsive p-0" style="height: auto;">
+                <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.general_category.create') }}">Crear</a>
           <table class="table table-head-fixed">
             <thead>
               <tr>
@@ -51,9 +51,8 @@
               </tr>
             </thead>
             <tbody>
-
-                @foreach ($categorias as $categoria)
-               
+             
+                @foreach ($categorias as $categoria)                    
                     <tr>
                         <td> {{$categoria->id }} </td>
                         <td> {{$categoria->nombre }} </td>
@@ -61,22 +60,48 @@
                         <td> {{$categoria->descripcion }} </td>
                         <td> {{$categoria->created_at }} </td>
                         <td> {{$categoria->updated_at }} </td>
-
-                        <td> <a class="btn btn-default"  
-                            href="{{ route('admin.category.show',$categoria->slug) }}">Ver</a>
+                        <td> 
+                          <a class="btn btn-default"  
+                            href="{{ route('admin.category.create') }}">Nuevo</a>
                         </td>
-
                         <td> <a class="btn btn-info" 
-                            href="{{ route('admin.category.edit',$categoria->slug) }}">Editar</a>
+                            href="{{ route('admin.general_category.edit',$categoria->slug) }}">Editar</a>
                         </td>
-
                         <td> <a class="btn btn-danger" 
-                            href="{{ route('admin.category.index') }}" 
+                            href="{{ route('admin.general_category.index') }}" 
                             v-on:click.prevent="deseas_eliminar({{$categoria->id}})"
                             >Eliminar</a>
                         </td>
-                        
+                       <br>                       
                     </tr>
+                    
+                    @foreach ($categoria->categories as $subcategoria)
+                          
+                           <tr style="background-color: #f2f2f2;">
+                            <td><a href="#" class=" btn btn-success disabled">Sub</a></td>
+                            <td>{{$subcategoria->nombre}}</td>
+                            <td>{{$subcategoria->slug}}</td>
+                            <td>{{$subcategoria->descripcion}}</td>
+                            <td> {{$subcategoria->created_at }} </td>
+                            <td> {{$subcategoria->updated_at }} </td>
+                            
+                            <td> <a class="btn btn-default"  
+                              href="{{ route('admin.category.show',$subcategoria->slug) }}">Ver</a>
+                          </td>
+  
+                          <td> <a class="btn btn-info" 
+                              href="{{ route('admin.category.edit',$subcategoria->slug) }}">Editar</a>
+                          </td>
+  
+                          <td> <a class="btn btn-danger" 
+                            href="{{ route('admin.category.index') }}" 
+                            v-on:click.prevent="deseas_eliminar2({{$subcategoria->id}})"
+                            >Eliminar</a>
+                        </td>
+                            
+                            </tr>
+                    @endforeach
+                    
                 @endforeach
              
               

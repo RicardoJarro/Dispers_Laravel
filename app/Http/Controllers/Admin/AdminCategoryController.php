@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\GeneralCategory;
 
 class AdminCategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class AdminCategoryController extends Controller
     public function index(Request $request)
     {
        $nombre = $request->get('nombre');
-        $categorias = Category::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(4);
+        $categorias = Category::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(8);        
         return view('admin.category.index',compact('categorias'));
     }
 
@@ -33,7 +34,8 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $principales=GeneralCategory::get();
+        return view('admin.category.create',compact('principales'));
     }
 
     /**
@@ -48,11 +50,11 @@ class AdminCategoryController extends Controller
          $request->validate([
             'nombre' => 'required|max:50|unique:categories,nombre',
             'slug' => 'required|max:50|unique:categories,slug',
-
         ]);
 
-         Category::create($request->all());
-         return redirect()->route('admin.category.index')->with('datos','Registro creado correctamente!');
+    
+         Category::create($request->except('_token'));
+        return redirect()->route('admin.category.index')->with('datos','Registro creado correctamente!');
 
     }
 
@@ -80,8 +82,8 @@ class AdminCategoryController extends Controller
     {
         $cat= Category::where('slug',$slug)->firstOrFail();
         $editar = 'Si';
-        
-        return view('admin.category.edit',compact('cat','editar'));
+        $principales=GeneralCategory::get();
+        return view('admin.category.edit',compact('cat','editar','principales'));
     }
 
     /**

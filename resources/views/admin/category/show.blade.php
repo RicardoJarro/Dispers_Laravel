@@ -1,9 +1,9 @@
 @extends('admin.system.admin')
 
-@section('titulo', 'Ver Categoría')
+@section('titulo', 'Ver Subcategoría')
 
 @section('breadcrumb')
-  <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">Categorías</a></li>
+  <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">Subcategorías</a></li>
   <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 
@@ -20,7 +20,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Administración de Categorias</h3>
+          <h3 class="card-title">Administración de Subcategorias</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -50,8 +50,11 @@
                        
                         <input  v-model="generarSLug"  class="form-control" type="text" name="slug" id="slug" value="{{ $cat->slug }} " readonly>
 
-
-                        
+                        <label for="general_category_id">Categoria principal</label>
+                    <select class="form-control" name="general_category_id" id="general_category_id" disabled>                      
+                          <option value={{$cat->general_category->id}}>{{$cat->general_category->nombre}}</option>
+                      
+                    </select>
                         <label for="descripcion">Descripción</label>
 
                         <textarea class="form-control" name="descripcion" id="descripcion" cols="30" rows="5" readonly>  {{ $cat->descripcion }}  </textarea>

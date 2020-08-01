@@ -10,7 +10,12 @@ const confirmareliminar = new Vue({
             //alert(id);
             this.urlaeliminar =document.getElementById('urlbase').innerHTML+'/'+id;
             $('#modal_eliminar').modal('show');
+        },
+        deseas_eliminar2(id) {
+            //alert(id);
+            this.urlaeliminar =document.getElementById('urlbase2').innerHTML+'/'+id;
+            $('#modal_eliminar').modal('show');
         }
-    },
+    }
 
 });

@@ -1,3 +1,12 @@
+@extends('admin.system.admin')
+
+@section('titulo', 'Administración de usuarios')
+
+@section('breadcrumb')
+  <li class="breadcrumb-item active">@yield('titulo')</li>
+@endsection
+
+@section('contenido')
 
     <div class="container">
     @if (Session::has('Mensaje')){{
@@ -47,3 +56,4 @@
         </tbody>
     </table>
     </div>
+    @endsection     

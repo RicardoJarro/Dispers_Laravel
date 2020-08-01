@@ -15,7 +15,9 @@ if (document.getElementById('app')) {
 if (document.getElementById('apicategory')) {
     require('./admin/apicategory');
 }
-
+if (document.getElementById('apigeneralcategory')) {
+    require('./admin/apigeneralcategory');
+}
 if (document.getElementById('apiproduct')) {
     require('./admin/apiproduct');
 }

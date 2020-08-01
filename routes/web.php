@@ -29,12 +29,7 @@ Route::get('/prueba', function () {
     return $productos;
 
 });
-// Route::get('/api', function () {
-//     //return view('welcome');
-//     $prod=Product::find(2)->category;
-//     $cat=Category::find(1)->products;
-//     return $cat;
-// });
+
 
 // Route::get('/bienvenido', function () {
 //     return "Hola como estas";
@@ -59,30 +54,30 @@ Route::get('/hombre','Controller@hombre_catagolo');
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
-/* ----Manejo de usuarios------- */
-
-// Route::get('/admin/usuarios', function () {
-//     return view('admin.user.index');
-// });
-
-Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
-
-//para obtener todas las rutas del usuario
-Route::resource('admin/user','Admin\AdminUserController')->names('admin.user');
-
-/* ----Admin Categoria----- */
-
-
+/* ---Inicio admin--- */
 Route::get('/admin', function () {
     return view('admin.system.admin_home');
 })->name('admin');
 
+/*------Acerca de Admin----- */
 Route::get('/admin/acerca_de', function () {
     return view('admin.system.acerca_de');
 });
 
+/* ----Manejo de usuarios------- */
 
+//para obtener todas las rutas del usuario
+Route::resource('admin/user','Admin\AdminUserController')->names('admin.user');
+Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
+
+/* ----Admin Categoria----- */
+
+Route::resource('admin/general_category', 'Admin\AdminGeneralCategoryController')->names('admin.general_category');
 Route::resource('admin/category', 'Admin\AdminCategoryController')->names('admin.category');
+
+
+
+
 
 
 
