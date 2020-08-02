@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::get('/prueba', function () {
     
    
-    return view('tienda/categorias/plantilla_categoria');
+    return view('tienda.system.carrito_resumen');
 
 });
 
@@ -92,3 +92,9 @@ Route::get('categoria/{category_slug}/{subcategory_slug?}', 'Tienda\CategoryCont
 /* -----Tienda Producto Especifico */
 
 Route::get('producto/{producto_slug}', 'Tienda\TiendaController@producto')->name('tienda.prodcuto');
+
+/* -----Carrito Compras----- */
+Route::post('/carrito', 'Tienda\CarritoController@agregar')->name('carrito.agregar');
+Route::get('/carrito_resumen', 'Tienda\CarritoController@resumen')->name('carrito.resumen');
+Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carrito.remover');
+Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');

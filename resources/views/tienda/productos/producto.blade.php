@@ -4,7 +4,73 @@
 
 @section('estilos')
 <link rel="stylesheet" href="{!! asset('css/tienda/estilo_producto.css')!!}">
+
+<style>
+    .quantity .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px
+    ;min-width: 35px;
+    text-align: center;
+}
+.quantity .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    }
+.quantity .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+/* div {
+    text-align: center;
+} */
+.minus:hover{
+    background-color: #da132d !important;
+}
+.plus:hover{
+    background-color: #da132d  !important;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+input{  
+    border: 0;
+    width: 2%;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* input:disabled{
+    background-color:white;
+} */
+    
+</style>
 @endsection
+
 
 @section('contenido')
 
@@ -81,32 +147,38 @@
                         <h3>{{$producto->precio}} $</h3>
                     </div>
                     <br>
-                    <h5>Color</h5>
-                    <div id="determ-producto-colores">
-                        <button class="boton-color amarillo"></button>
-                        <button class="boton-color azul"></button>
-                        <button class="boton-color blanco"></button>
-                        <button class="boton-color negro"></button>
-                    </div>
-                    <br>
-                    <div class="container-talla">
-                        <h5>Talla</h5>
-                        <div class="opc-talla">
-                            <select name="" id="tallas-disponibles">
+                    
 
-                            </select>
+                    <form action="{{route('carrito.agregar')}}" method="POST">
+                        @csrf
+
+                        {{-- <h5>Color</h5>
+                        <div id="determ-producto-colores">
+                            <button class="boton-color amarillo"></button>
+                            <button class="boton-color azul"></button>
+                            <button class="boton-color blanco"></button>
+                            <button class="boton-color negro"></button>
                         </div>
-                    </div>
-                    <br>
-                    <div class="container-cantidad">
-                        <h4>Cantidad</h4>
+                        <br> --}}
+                        
+                            <h5>Talla</h5>
+                            
+                             <select name="talla" id="tallas-disponibles" class="form-control col-3">
 
-                        <div class="texto-no-seleccionable mano" id="btn-menos"><i class="fas fa-minus"></i></div>
-                        <div class="texto-no-seleccionable" id="id_num_prenda">1</div>
-                        <div class="texto-no-seleccionable mano" id="btn-mas"><i class="fas fa-plus"></i></div>
-                    </div>
-                    <br>
-                    <button type="button" id="añadir-carrito" class="btn btn-danger d-block" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
+                             </select>
+                        
+                        <br>
+                        <div class="quantity">
+                            <h5>Cantidad</h5>
+                            <span class="minus bg-dark">-</span>
+                            <input name="quantity" id="quantity" type="number"  class="count" value="1" readonly>
+                            <span class="plus bg-dark">+</span>
+                        </div>
+                        <br>
+                        <input type="hidden" name='id' value={{$producto->id}}>
+                        {{-- data-toggle="modal" data-target="#exampleModal" --}}                        
+                        <button type="submit" id="añadir-carrito" class="btn btn-danger d-block" ><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
+                    </form>
                 </div>
             </div>
 
@@ -143,6 +215,22 @@
     @endsection
     <!-- LIBRERIAS -->
     @section('addScript')
+
+
+    <script>
+        $(document).ready(function(){
+		    $('.count').prop('disabled', false);
+   			$(document).on('click','.plus',function(){
+				$('.count').val(parseInt($('.count').val()) + 1 );
+    		});
+        	$(document).on('click','.minus',function(){
+    			$('.count').val(parseInt($('.count').val()) - 1 );
+    				if ($('.count').val() == 0) {
+						$('.count').val(1);
+					}
+    	    	});
+ 		});
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.js"></script>
     <!-- Para el efecto zoom sobre la imagen -->
