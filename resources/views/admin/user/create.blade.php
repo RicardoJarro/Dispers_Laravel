@@ -7,7 +7,7 @@
 
 @section('contenido')
 <div id="apicategory">
-  <form action="{{ route('admin.user.store') }}" method="POST" autocomplete="off">
+  <form action="{{ route('admin.user.store')}}" method="POST" autocomplete="off">
     @csrf
 <!-- Default box -->
 <div class="card">

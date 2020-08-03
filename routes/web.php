@@ -72,13 +72,14 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function
 
     //para obtener todas las rutas del usuario
     Route::resource('user', 'Admin\AdminUserController')->names('admin.user');
+    Route::get('user/cambiar/{id}','Admin\AdminUserController@cambiar_rol')->name('admin.cambiar_rol');
     Route::get('client', 'Admin\AdminUserController@index2')->name('admin.user.index2');
     Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
     
 });
 
-
-
+Route::get('perfil','Tienda\UserController@verperfil')->middleware('auth');
+Route::post('perfil','Tienda\UserController@actualizar')->name('user.actualizar');
 
 
 Route::get('cancelar/{ruta}', function ($ruta) {
@@ -101,7 +102,8 @@ Route::post('/carrito', 'Tienda\CarritoController@agregar')->name('carrito.agreg
 Route::get('/carrito_resumen', 'Tienda\CarritoController@resumen')->name('carrito.resumen');
 Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carrito.remover');
 Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');
-
+Route::get('/registro','Tienda\UserController@ver_fomulario')->name('user.registro');
+Route::post('/registro','Tienda\UserController@registrar')->name('user.registro_post');
 
 /* -----clientes------ */
 //Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');

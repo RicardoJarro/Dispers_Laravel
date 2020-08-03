@@ -34,7 +34,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0" style="height: 550px;">
-                  <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.category.create') }}">Crear</a>
+                  {{-- <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.category.create') }}">Crear</a> --}}
             <table class="table table-head-fixed">
 
                 <table class="table table-light table-hover">

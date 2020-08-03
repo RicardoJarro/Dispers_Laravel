@@ -16,7 +16,7 @@
 <ul class="header-links">
     <div class="btn-group mt-1" >
     <li><a href="{{route('login')}}" class="btn btn-dark btn-sm">Ingresar</a></li>
-    <li><a href="#" class="btn btn-dark btn-sm">Registrarse</a></li>
+    <li><a href="{{route('user.registro')}}" class="btn btn-dark btn-sm">Registrarse</a></li>
     </div>
 </ul>
 @endguest

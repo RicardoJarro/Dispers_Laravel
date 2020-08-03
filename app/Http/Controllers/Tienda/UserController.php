@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tienda;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 Use App\User;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -95,4 +96,50 @@ class UserController extends Controller
         User::where('id','=',$id   )->update($user); 
         return redirect('tienda.index')->with('Mensaje',"Usuario eliminado");
     }
+
+    public function verperfil(){
+        $user = auth()->user();
+        return view('tienda.usuario.perfil')->with('user',$user);
+    }
+    public function actualizar(Request $request){
+
+        
+
+        if($request->atributo !='password'){
+            
+            User::where('id', $request->id)->update(array($request->atributo => $request->nuevo));
+            return redirect('/perfil')->with('datos','Usuario actualizado');
+        }else{
+            
+            if($request->password1 == $request->password2){
+                
+                $pass=bcrypt($request->password1);
+                User::where('id', $request->id)->update(array('password'=> $pass));
+                return redirect('/perfil')->with('datos','Usuario actualizado');
+
+            }else{
+                return redirect('/perfil')->with('datos','Las contraseñas no son iguales');
+            }
+        }
+
+    }
+
+    public function ver_fomulario(){
+        return view('tienda/usuario/registrar_usuarios');
+    }
+
+    public function registrar(Request $request ){            
+        $pass=bcrypt($request->password);
+        $request->merge([
+            'password' => $pass,
+        ]);         
+        $slug=Str::slug($request->nickname);
+        $request->request->add(['slug' => $slug]);
+        
+
+        $datosUsers=request()->except(['_token','_method','confirm_password']);
+        User::insert($datosUsers);
+        return redirect('login')->with('datos','Usuario registrado');
+    }
+
 }

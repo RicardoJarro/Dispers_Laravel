@@ -253,7 +253,7 @@
                 <li class="nav-item">
                   <a href="{{ route('admin.user.index2')}}" class="nav-link">
                     <i class="far fa-circle nav-icon text-info"></i>
-                    <p>Lista Admins</p>
+                    <p>Lista clientes</p>
                   </a>
                 </li>                              
               </ul>

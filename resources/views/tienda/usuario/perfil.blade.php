@@ -1,252 +1,228 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('tienda/system/plantilla_general')
 
-<head>
+@section('titulo','Perfil del usuario')
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+@section('estilos')
+<link rel="stylesheet" href="{!! asset('css/tienda/inicio_perfil_asistencia_preguntas.css')!!}">
+@endsection
 
- 
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="http://dispers.test/dispers/css/inicio_perfil_asistencia_preguntas.css" rel="stylesheet"> 
-  <link href="http://dispers.test/dispers/css/boostrap/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-  <!-- Custom styles for this template -->
-  <!--<link href="http://dispers.test/dispers/css/simple-sidebar.css" rel="stylesheet">-->
+@section('contenido')
 
-</head>
+<div class="d-flex" id="wrapper">
 
-<body>
-  @include('tienda.system.header')
-  <div class="d-flex" id="wrapper">
-
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Modificar Datos </div>
-      <div class="list-group list-group-flush">
-        <a data-modal-target="modalNombre" class="list-group-item list-group-item-action bg-light">Nombre</a>
-        <a data-modal-target="modalNick" class="list-group-item list-group-item-action bg-light">Nick</a>
-        <a data-modal-target="modalFecha" class="list-group-item list-group-item-action bg-light">Fecha Nacimiento</a>
-        <a data-modal-target="modalCorreo" class="list-group-item list-group-item-action bg-light">Correo</a>
-        <a data-modal-target="modalContraseña" class="list-group-item list-group-item-action bg-light">Contraseña</a>
-        <a data-modal-target="modalGenero" class="list-group-item list-group-item-action bg-light">Genero</a> 
-        
-       
-      </div>
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Modificar Datos </div>
+    <div class="list-group list-group-flush">
+      <a data-modal-target="modalNombre" class="list-group-item list-group-item-action bg-light">Nombre</a>
+      <a data-modal-target="modalNick" class="list-group-item list-group-item-action bg-light">Nick</a>
+      <a data-modal-target="modalCorreo" class="list-group-item list-group-item-action bg-light">Correo</a>
+      <a data-modal-target="modalContraseña" class="list-group-item list-group-item-action bg-light">Contraseña</a>
     </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-danger d-block" id="menu-toggle">Configuracion</button>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-           
-            <li class="nav-item dropdown">
-                           
-             
-                <div>
-                  <a class="fas fa-trash-alt icon href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                   
-                    <a data-modal-target="modalEliminar" class="dropdown-item" href="#">Eliminar Cuenta</a>
-                  
-                  </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div  class='centraTabla'>
-     
-
-        <!-- Contenido Pincipal datos Usuario -->
-      <div class="container-fluid">
-        <h1 class="mt-4">Perfil del Usuario</h1>
-        <hr></hr>
-        <img src="http://dispers.test/dispers/images/pagina/usuario.jpg"   width="120" height="100" HSPACE="180" VSPACE="10">
-        <hr></hr>
-        <h6>Nombre </h6>
-        <h6>Nick </h6>
-        <h6>Fecha de Nacimiento </h6>
-        <h6>Correo Electronico</h6>
-        <h6>Genero</h6>
-      </div>
-    </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-
   </div>
-  <!-- /#wrapper -->
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <button class="btn btn-danger d-block" id="menu-toggle">Configuracion</button>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item dropdown">
+            <div>
+              <a class="fas fa-trash-alt icon href=" #" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a data-modal-target="modalEliminar" class="dropdown-item" href="#">Eliminar Cuenta</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class='centraTabla'>
+
+
+      <!-- Contenido Pincipal datos Usuario -->
+      <div class="container-fluid">
+        @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        <div class="alert-text">
+                            @foreach ($errors->all() as $error)
+                            <span>{{$error}}</span>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @endif
+        <h1 class="mt-4">Perfil de {{$user->nombre}}</h1>
+        <hr>
+        <img src="{{URL::asset('/images/user.png')}}" width="120" height="100" HSPACE="180" VSPACE="10">
+        <hr>
+        <h6>Nick: {{$user->nickname}}</h6>
+        <h6>Email: {{$user->email}}</h6>
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 
 
 
 
- 
- 
- 
- 
-               <!-- Contenidos Modales -->
 
- <!-- ******************Eliminar************************ -->
- <div class="modal" id="modalEliminar"  >
+
+
+
+<!-- Contenidos Modales -->
+
+<!-- ******************Eliminar************************ -->
+<div class="modal" id="modalEliminar">
   <div class="modal-content">
     <span class="modal-close">&times;</span>
     <h1>Eliminar tu Perfil</h1>
-    <p>Lamentamos que quieras eliminar tu cuenta, nos encanto que formaras parte de nuestra pagina y las  contribuciones que hiciste con nosotros.</p>
+    <p>Lamentamos que quieras eliminar tu cuenta, nos encanto que formaras parte de nuestra pagina y las contribuciones
+      que hiciste con nosotros.</p>
     <p>Para eliminar tu cuenta introduce tu contraseña :</p>
     <div class="input-contenedor">
       <i class="fas fa-key icon"></i>
-      <input  type="password" placeholder="Contraseña">
-       </div>
-     
-          <input type="button"  value="Confirmar" class="button" > 
-</div>
+      <form action="" method="POST">
+        <input type="password" placeholder="Contraseña">
+    </div>
+    <input type="button" value="Confirmar" class="button">
+    </form>
+  </div>
 </div>
 
 <!-- ******************CAMBIAR NOMBRE************************ -->
-<div class="modal" id="modalNombre"  >
+<div class="modal" id="modalNombre">
   <div class="modal-content">
     <span class="modal-close">&times;</span>
     <h1>Nombre</h1>
     <p>Los cambios se veran reflejados en su perfil de usuario</p>
-  <b><p>Ingrese el nuevo nombre :</p></b>
-    <div class="input-contenedor">
-      <i class="fas fa-user icon"></i>
-      <input type="text" placeholder="Nombre Completo">
-      
+    <b>
+      <p>Ingrese el nuevo nombre :</p>
+    </b>
+
+  <form action="{{route('user.actualizar')}}" method="post">
+    @csrf
+      <div class="input-contenedor">
+        <i class="fas fa-user icon"></i>
+        <input type="text" name="nuevo" placeholder="{{$user->nombre}}">
+        <input type="hidden" name="id"  value="{{$user->id}}">
+        <input type="hidden" name="atributo" value="nombre">
       </div>
-      
-            <input type="button"  value="Confirmar" class="button" >         
+      <input type="submit" value="Actualizar" class="btn btn-primary">
+    </form>
+
   </div>
 </div>
 
 <!-- ******************CAMBIAR NICK************************ -->
-<div class="modal" id="modalNick"  >
+<div class="modal" id="modalNick">
   <div class="modal-content">
     <span class="modal-close">&times;</span>
     <h1>Nick</h1>
     <p>Los cambios se veran reflejados en su perfil de usuario</p>
-  <b><p>Ingrese su nuevo nick :</p></b>
-  <div class="input-contenedor">
-    <i class="fas fa-smile icon"></i>
-    <input type="text" placeholder="Nick ">
-         
-    </div>
-      
-            <input type="button"  value="Confirmar" class="button" > 
-          
-  </div>
-</div>
-
-<!-- ******************CAMBIAR FECHA************************ -->
-<div class="modal" id="modalFecha"  >
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <h1>Fecha de Nacimiento</h1>
-    <p>Los cambios se veran reflejados en su perfil de usuario</p>
-  <b><p>Ingrese su fecha de nacimiento :</p></b>
-  
-   
-  <div class='centraTabla'>
-      <input id="date" type="date">
-  </div>
-  <p></p>
-      
-      
- 
-        <input type="button"  value="Confirmar" class="button" > 
-     
+    <b>
+      <p>Ingrese su nuevo nick :</p>
+    </b>
+    <form action="{{route('user.actualizar')}}" method="post">
+      @csrf
+      <div class="input-contenedor">
+        <i class="fas fa-smile icon"></i>
+        <input type="text" name="nuevo" placeholder="{{$user->nickname}}">
+        <input type="hidden" name="id" value="{{$user->id}}">
+        <input type="hidden" name="atributo" value="nickname">
+      </div>
+      <input type="submit" value="Actualizar" class="btn btn-primary">
+    </form>
+    
   </div>
 </div>
 
 <!-- ******************CAMBIAR CORREO************************ -->
-<div class="modal" id="modalCorreo"  >
+<div class="modal" id="modalCorreo">
   <div class="modal-content">
+    <form action="{{route('user.actualizar')}}" method="post">
+      @csrf
     <span class="modal-close">&times;</span>
     <h1>Correo Electronico</h1>
     <p>Los cambios se veran reflejados en su perfil de usuario</p>
-  <b><p>Ingrese su nuevo correo :</p></b>
+    <b>
+      <p>Ingrese su nuevo correo :</p>
+    </b>
     <div class="input-contenedor">
       <i class="fas fa-envelope icon"></i>
-      <input type="text" placeholder="Correo Electronico">
-      
-      </div>
-      <p>Al cambiar tu correo electronico te llegara un mensaje de autentificacion al nuevo correo, ademas todas las facturas generadas despues del cambio se reenviaran a este</p>
-      
-            <input type="button"  value="Confirmar" class="button" > 
-       
+    <input type="email" name="nuevo" placeholder="{{$user->email}}">
+
+    </div>
+    <p>Al cambiar tu correo electronico te llegara un mensaje de autentificacion al nuevo correo, ademas todas las
+      facturas generadas despues del cambio se reenviaran a este</p>
+      <input type="hidden" name="id" value="{{$user->id}}">
+      <input type="hidden" name="atributo" value="email">
+      <input type="submit" value="Actualizar" class="btn btn-primary">
+  </form>
   </div>
 </div>
 <!-- ******************CAMBIAR CONTRASEÑA************************ -->
-<div class="modal" id="modalContraseña"  >
+<div class="modal" id="modalContraseña">
   <div class="modal-content">
+    <form action="{{route('user.actualizar')}}" method="post">
+      @csrf
     <span class="modal-close">&times;</span>
     <h1>Contraseña</h1>
     <p>Los cambios se veran reflejados en su perfil de usuario</p>
     <p>Se finalizara session en todos los dispositivos excepto en el que se esta realizando la modificacion :</p>
-  <b><p>Ingrese su nueva contraseña :</p></b>
+    <b>
+      <p>Ingrese su nueva contraseña :</p>
+    </b>
     <div class="input-contenedor">
       <i class="fas fa-key icon"></i>
-      <input  type="password" placeholder="Contraseña nueva">
-       </div>
-  <p>Utiliza 8 caracteres como minimo, no utilizes una contraseña de otro sitio o un termino que sea demasiado facil :</p>
-  <b><p>Confirme su contraseña</p> </b>
-  <div class="input-contenedor">
+      <input type="password" placeholder="Contraseña nueva" name='password1'>
+    </div>
+    <p>Utiliza 8 caracteres como minimo, no utilizes una contraseña de otro sitio o un termino que sea demasiado facil :
+    </p>
+    <b>
+      <p>Confirme su contraseña</p>
+    </b>
+    <div class="input-contenedor">
       <i class="fas fa-lock icon"></i>
-      <input  type="password" placeholder="Confirmacion Contraseña">
-       </div>
-       
-            <input type="button"  value="Confirmar" class="button" > 
-          
+      <input type="password" placeholder="Confirmacion Contraseña" name="password2">
+      <input type="hidden" name="id" value="{{$user->id}}">
+      <input type="hidden" name="atributo" value="password">
+      
+    </div>
+
+    <input type="submit" value="Actualizar" class="btn btn-primary">
+  </form>
   </div>
 </div>
-<!-- ******************CAMBIAR GENERO************************ -->
-  <div class="modal" id="modalGenero"  >
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <h1>Genero</h1>
-      <p>Los cambios se veran reflejados en su perfil de usuario</p>
-    <b><p>Seleccione una opcion :</p></b>
-
-    <select class="select-css" name="comboSeleccionarGenero">                  
-      <option value="1" selected>Masculino</option>
-      <option value="2" >Femenino</option> 
-      <option value="3">Prefiero no Especificar </option>
-    
-    </select>
-         
-         
-              <input type="button"  value="Confirmar" class="button" > 
-           
-    </div>
-  </div>
 
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="http://dispers.test/dispers/js/jquery.min.js"></script>
-  
-  <script src="http://dispers.test/dispers/js/bootstrap.bundle.min.js"></script>
-  <script src="http://dispers.test/dispers/js/modal.js"></script>
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
+@endsection
+@section('addScript')
+{{-- <script src="{{ asset('js/jquery.min.js')}}"></script> --}}
+<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('js/modal.js')}}"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+  $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-  </script>
-  @include('tienda.system.footer')
-</body>
-
-</html>
+</script>
+@endsection

@@ -9,12 +9,12 @@
 @section('contenido')
 
 <div id="confirmareliminar" class="row">
-    <span style="display:none;" id="urlbase">{{route('admin.category.index')}}</span>
+    <span style="display:none;" id="urlbase">{{route('admin.user.index')}}</span>
     @include('custom.modal_eliminar')
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Sección de categorías</h3>
+            <h3 class="card-title">Sección de administradores</h3>
   
             <div class="card-tools">
               
@@ -34,7 +34,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0" style="height: 550px;">
-                  <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.category.create') }}">Crear</a>
+                  <a class=" m-2 float-right btn btn-primary"  href="{{ route('admin.user.create') }}">Crear</a>
             <table class="table table-head-fixed">
 
                 <table class="table table-light table-hover">
@@ -61,12 +61,14 @@
                             <td>
                                 
                                 <a class="btn btn-warning" href="{{ url('admin/user/'.$user->id.'/edit') }}">Editar</a>                      
-            
-                                <form method="post" action="{{ url('admin/user/'.$user->id) }}" style="display:inline">
+                                <a class="btn btn-danger" href="{{ url('admin/user/cambiar/'.$user->id) }}">No admin</a>                      
+
+
+                                {{-- <form method="post" action="{{ url('admin/user/'.$user->id) }}" style="display:inline">
                                     {{csrf_field()}}
                                     {{ method_field('DELETE') }}
-                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Ud desea borrar los datos?');">Borrar</button>
-                                </form>    
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Ud desea borrar los datos?');">Desactivar</button>
+                                </form>     --}}
                             </td>
             
                         </tr>

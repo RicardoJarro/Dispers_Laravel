@@ -8,8 +8,9 @@ class User extends  Authenticatable
 {
     protected $remembre_token=false;
     protected $table='users';
+    public $timestamps = true;
 
-    protected $fillable = ['nombre','email','password','nickname','slug'];
+    protected $fillable = ['nombre','email','password','nickname','slug','created_at','updated_at'];
 
     protected $guarded=['id'];
 

@@ -50,13 +50,15 @@ class AdminUserController extends Controller
     {
         //$datosUsers=request()->all();
         //trae los daots de la peticion exceptuando el toque que le ppone por defecto laravel
-        $request->password=bcrypt($request->password);
+        $pass=bcrypt($request->password);        
+        $request->merge([
+            'password' => $pass,
+        ]); 
+        
         $datosUsers=request()->except('_token');
         User::insert($datosUsers);
 
-        return redirect('admin/user')->with('Mensaje','Empleado agregado con exito');
-        //return response()->json($datosUsers);  
-
+        return redirect()->route('admin.user.index')->with('datos','Administrador agregado con exito');
     }
 
     /**
@@ -79,7 +81,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         //Edita un usuario dependiendo su id
-        $user=User::findOrfail($id);
+        $user=User::findOrfail($id);        
         return view('admin.user.edit',compact('user'));
     }
 
@@ -93,11 +95,15 @@ class AdminUserController extends Controller
     public function update(Request $request, $id)
     {
         //Actualiza a un usuario y el excep elimina el toquen y el metodo de peticion que se esta haciendo de los datos
-        $datosUsers=request()->except(['_token','_method']);
+        $pass=bcrypt($request->password);        
+        $request->merge([
+            'password' => $pass,
+        ]); 
+        $datosUsers=request()->except(['_token','_method']);        
         User::where('id','=',$id   )->update($datosUsers); 
         //$user= users::findOrfail($id);
         //return view('users.edit',compact('user'));
-        return redirect('admin/user')->with('Mensaje','Empleado modificado con exito');
+        return redirect('admin/user')->with('datos','Empleado modificado con exito');
     }
 
     /**
@@ -110,6 +116,11 @@ class AdminUserController extends Controller
     {
         //Elimina un usuario mediante una id
         User::destroy($id);
-        return redirect('admin/user')->with('Mensaje','Empleado eliminado con exito');
+        return redirect('admin/user')->with('datos','Empleado eliminado con exito');
+    }
+
+    public function cambiar_rol($id){
+        User::where('id', $id)->update(array('admin' => 'no'));
+        return redirect('admin/user')->with('datos','El usuario ya no es administrador');
     }
 }
