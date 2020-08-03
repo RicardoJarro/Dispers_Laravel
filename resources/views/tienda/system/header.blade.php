@@ -4,6 +4,8 @@
         <div id="top-header">
             <div class="container position-relative">
                 <!-- en este ul  estaba float-left -->
+                <div class="row">
+                    <div class="col-9">
                 <ul class="header-links ">
                     <li><a href="#"><i class="fa fa-phone"></i> +593989100245</a>
                     </li>
@@ -14,16 +16,10 @@
                     <li><a href="formulario.php"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Asistencia</a>
                     </li>
                 </ul>
-                <ul class="header-links">
-                    <div class="btn-group " id="boton-cuenta">
-                        <button type="button" class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o"></i> Cuenta</button>
-                        <div class="dropdown-menu">
-                            <a href="perfil.php" class="dropdown-item"> <i class="fa fa-user-o"></i> Perfil de usuario </a>
-                            <br> <a href="compras_realizadas.php" class="dropdown-item"> <i class="fa fa-list-ol" aria-hidden="true"></i> Listar compras </a>
-                            <br> <a href="#" class="dropdown-item"> <i class="fa fa-times" aria-hidden="true"></i> Cerrar Sesion </a>
-                        </div>
-                    </div>
-                </ul>
+            </div>
+            <div class="col-3">
+                @include('tienda/system/usuario_logueado')</div>
+                </div>
             </div>
         </div>
         <!-- /TOP HEADER -->

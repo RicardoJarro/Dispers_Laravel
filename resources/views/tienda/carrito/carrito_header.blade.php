@@ -51,7 +51,7 @@
         </div>
         <div class="cart-btns p-2">
             <a href="{{route('carrito.resumen')}}">Ver Carrito</a>
-            <a href="facturacion.php">Comprar <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{route('confirmar_comprar')}}">Comprar <i class="fa fa-arrow-circle-right"></i></a>
         </div>
         @else
         

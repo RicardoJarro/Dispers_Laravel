@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = 'admin';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -21,19 +21,28 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view ('seguridad.login_admin');
+        return view ('seguridad.login_cliente');
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        if($user->rol=='admin'){
-
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+   
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+   
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->admin =='si') {
+                return redirect()->route('admin');
+            }else{
+                return redirect()->route('inicio');
+            }
         }else{
-            $this->guard()->logout();
-            $request->session()->invalidate();
-            return redirect('seguridad/login')->withErrors(['error'=>'Tu no eres un administrador']);
-        }
-    }    
-    //laravel usa correo para conectarse
-    //si queremos por otro parametro sobreescribimos el siguiente metodo        
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
+        }          
+    }          
 }

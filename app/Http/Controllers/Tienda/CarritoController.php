@@ -54,4 +54,6 @@ class CarritoController extends Controller
         return back()->with('succes','Carrito vacio');
 
     }
+
+    
 }

@@ -74,7 +74,7 @@
                         <p class="float-right" id="total-resumen-pedido"><b>{{number_format(Cart::getTotal(),2)}}$</b></p>
                         <p class="texto-resumen-pedido "><b>Total</b></p>
                     </div>                    
-                    <div class="mt-3 centrar-forzado"><a href="facturacion.php">
+                    <div class="mt-3 centrar-forzado"><a href="{{route('confirmar_comprar')}}">
                     <button type="button" class="btn btn-danger">Comprar</button></a>
                 </div>
                 </div>

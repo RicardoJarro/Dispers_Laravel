@@ -17,8 +17,16 @@ class AdminUserController extends Controller
     public function index()
     {
         // Imprime los datos de la tabla usuario en un rango de 10 filas
-        $users=User::get();
+        $users=User::where('admin','si')->paginate(10);
+        
         return view('admin.user.index',compact('users'));
+    }
+
+    public function index2()
+    {
+        // Imprime los datos de la tabla usuario en un rango de 10 filas
+        $users=User::where('admin','no')->paginate(10);        
+        return view('admin.user.index2',compact('users'));
     }
 
     /**
@@ -42,8 +50,10 @@ class AdminUserController extends Controller
     {
         //$datosUsers=request()->all();
         //trae los daots de la peticion exceptuando el toque que le ppone por defecto laravel
-        $datosUsers=request()->except('_token');        
+        $request->password=bcrypt($request->password);
+        $datosUsers=request()->except('_token');
         User::insert($datosUsers);
+
         return redirect('admin/user')->with('Mensaje','Empleado agregado con exito');
         //return response()->json($datosUsers);  
 

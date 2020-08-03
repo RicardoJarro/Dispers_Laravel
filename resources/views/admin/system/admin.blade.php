@@ -214,31 +214,51 @@
               </ul>
             </li>
 
-            <!-- Usuarios -->
+            <!-- administradores -->
              <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="nav-icon fas fa-user-cog"></i>
                 <p>
-                  Usuarios
+                  Administradores
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('admin.category.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de Usuarios</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('admin.category.create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                  <a href="{{ route('admin.user.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon text-danger"></i>
                     <p>Agregar Admin</p>
                   </a>
                 </li>
-               
+                <li class="nav-item">
+                  <a href="{{ route('admin.user.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon text-info"></i>
+                    <p>Lista Admins</p>
+                  </a>
+                </li>                              
               </ul>
             </li>
+
+
+            <!-- usuarios -->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  usuarios
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">                
+                <li class="nav-item">
+                  <a href="{{ route('admin.user.index2')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon text-info"></i>
+                    <p>Lista Admins</p>
+                  </a>
+                </li>                              
+              </ul>
+            </li>
+
 
             <li class="nav-item">
               <a href="../gallery.html" class="nav-link">

@@ -25,7 +25,7 @@ Route::get('prueba','Seguridad\ClienteLoginController@verusuario')->middleware('
 
 Route::get('prueba2', function () {
     return "eres admin";
-})->name('prueba2');
+});
 
 
 
@@ -35,12 +35,21 @@ Route::get('prueba2', function () {
 
 /* ---Inicio admin--- */
 
-Route::post('seguridad/login','Seguridad\LoginController@login')->name('login_post');
-Route::get('seguridad/login','Seguridad\LoginController@index')->name('login');
-
+Route::get('login','Seguridad\LoginController@index')->name('login');
+Route::post('login','Seguridad\LoginController@login')->name('login_post');
 Route::get('seguridad/logout','Seguridad\LoginController@logout')->name('logout');
 
-Route::group(['prefix' => 'admin','middleware'=>'auth' ], function () {
+
+// Route::get('cliente/login','Seguridad\ClienteController@showLoginForm')->name('login.cliente');
+// Route::post('cliente/login','Seguridad\ClienteController@login')->name('login.cliente_post');
+// Route::get('cliente/lo','Seguridad\ClienteController@logout')->name('logout.cliente');
+
+
+
+
+
+
+Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function () {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin');
 
@@ -58,14 +67,18 @@ Route::group(['prefix' => 'admin','middleware'=>'auth' ], function () {
 
     /* ---Admin Producto----- */
     Route::resource('product', 'Admin\AdminProductController')->names('admin.product');
+
+    /* ----Manejo de usuarios------- */
+
+    //para obtener todas las rutas del usuario
+    Route::resource('user', 'Admin\AdminUserController')->names('admin.user');
+    Route::get('client', 'Admin\AdminUserController@index2')->name('admin.user.index2');
+    Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
+    
 });
 
 
-/* ----Manejo de usuarios------- */
 
-//para obtener todas las rutas del usuario
-Route::resource('admin/user', 'Admin\AdminUserController')->names('admin.user');
-Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
 
 
 Route::get('cancelar/{ruta}', function ($ruta) {
@@ -91,4 +104,11 @@ Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito
 
 
 /* -----clientes------ */
-Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
+//Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
+
+//Route::get('cliente/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
+
+
+
+
+Route::get('pedido','Tienda\CompraController@compra')->name('confirmar_comprar');

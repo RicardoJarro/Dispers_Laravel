@@ -4,7 +4,7 @@ namespace App\Seguridad;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Client extends  Authenticatable
+class Cliente extends  Authenticatable
 {
     protected $remembre_token=false;
     protected $table='clients';

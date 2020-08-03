@@ -46,7 +46,7 @@
 			}
 			
 			.nav li a:hover {
-				/* background-color:#434343; */
+				background-color:#434343;
 				color: yellow;
 			}
 			
@@ -62,8 +62,9 @@
 			
 			.nav li ul li {
 				position:relative;
+                background-color:#434343;
 			}
-			
+            			
 			.nav li ul li ul {
 				right:-140px;
 				top:0px;
@@ -80,6 +81,7 @@
                     Menu
                     <i class="fas fa-bars ml-1"></i>
                 </button>
+               
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav text-uppercase ml-auto">
 						@foreach ($categorias as $categoria)
@@ -90,10 +92,15 @@
 							@endforeach
 							</ul>
 						</li>
-						@endforeach
+                        @endforeach
+                        @auth
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{route('logout')}}">Cerrar Sesion</a></li>
+                        @endauth
                         
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Iniciar Sesion</a></li>
+                        @guest
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{route('login')}}">Iniciar Sesion</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Registro</a></li>
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -102,7 +109,11 @@
         <header class="masthead">
             <div class="container">
                 <div class="masthead-heading ">Bienvenido a Dispers!</div>
-                <div class="masthead-subheading">Tenemos lo que necesitas</div>                
+                <div class="masthead-subheading">Tenemos lo que necesitas
+                    @auth
+                    {{ Auth::user()->nombre }}
+                    @endauth
+                </div>                
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{route('tienda.categoria', 'ropa')}}">Comenzar a comprar</a>
             </div>
         </header>
@@ -271,7 +282,7 @@
                     </div>
                     <div class="col-lg-4 text-lg-right">
                         <a class="mr-3" href="#!">Acerca de</a>
-						<a href="#!">Preguntas Frecuentes</a>
+						<a class="mr-3" href="#!">Preguntas Frecuentes</a>
 						<a href="{{route('admin')}}">Admin</a>
                     </div>
                 </div>

@@ -46,10 +46,7 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        // 'client'=>[
-        //     'driver'=>'session',
-        //     'provider'=>'client'
-        // ],
+        
     ],
 
     /*
@@ -75,10 +72,7 @@ return [
             'model' => App\Seguridad\User::class,
         ],
 
-        // 'client' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Seguridad\Client::class,
-        // ],
+        
     ],
 
     /*

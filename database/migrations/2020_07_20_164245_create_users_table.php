@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email',50)->unique();
             $table->string('password');
             $table->string('estado',10)->default('activo');
-            $table->string('rol',15)->default('cliente');
+            $table->string('admin',15)->default('si');
             $table->timestamps();
         });
     }

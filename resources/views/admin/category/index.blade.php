@@ -24,8 +24,7 @@
               <div class="input-group input-group-sm" style="width: 150px;">
                 <input type="text" name="nombre" class="form-control float-right" 
                 placeholder="Buscar"
-                value="{{ request()->get('nombre') }}"
-                >
+                value="{{ request()->get('nombre') }}">
 
                 <div class="input-group-append">
                   <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>

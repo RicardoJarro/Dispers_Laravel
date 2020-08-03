@@ -17,6 +17,7 @@
 .select2-selection {
     height: 38px !important;
 }
+
 </style>
 @endsection
 

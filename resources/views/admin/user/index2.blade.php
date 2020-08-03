@@ -1,6 +1,6 @@
 @extends('admin.system.admin')
 
-@section('titulo', 'Gestion de admins')
+@section('titulo', 'Administración de usuarios')
 
 @section('breadcrumb')
   <li class="breadcrumb-item active">@yield('titulo')</li>
@@ -60,13 +60,13 @@
                             <td>{{$user->estado}}</td>
                             <td>
                                 
-                                <a class="btn btn-warning" href="{{ url('admin/user/'.$user->id.'/edit') }}">Editar</a>                      
+                                <a class="btn btn-info" href="{{ url('admin/user/'.$user->id.'/edit') }}">ver compras</a>                      
             
-                                <form method="post" action="{{ url('admin/user/'.$user->id) }}" style="display:inline">
+                                {{-- <form method="post" action="{{ url('admin/user/'.$user->id) }}" style="display:inline">
                                     {{csrf_field()}}
                                     {{ method_field('DELETE') }}
                                     <button class="btn btn-danger" type="submit" onclick="return confirm('Ud desea borrar los datos?');">Borrar</button>
-                                </form>    
+                                </form>     --}}
                             </td>
             
                         </tr>
