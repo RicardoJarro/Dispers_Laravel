@@ -1,6 +1,10 @@
 @extends('admin.system.admin')
 @section('titulo','Sistema Para Administradores')
 
+@section('usuarioID')
+{{$var}}
+@endsection
+
 @section('contenido')
 
 

@@ -32,7 +32,7 @@
                             <img src="{{$item->attributes->imageurl}}" class="h-100">
                         </div>
                         <div class="info-item-carrito d-inline-block col-8 position-relative">
-                        <a href="#"><h4>{{$item->name}}</h4></a>
+                            <a href="{{ url('producto/'.$item->attributes->producto_slug) }}"><h4>{{$item->name}}</h4></a>
                                 {{-- <h6 class="d-inline">Color: </h6>
                                 <h6 class="d-inline">negro</h6> --}}                                    
                                     <h5 class="d-inline-block">Cantidad:</h5>

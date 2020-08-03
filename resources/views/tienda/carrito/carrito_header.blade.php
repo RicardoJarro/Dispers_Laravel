@@ -20,7 +20,7 @@
                             <img src="{{$item->attributes->imageurl}}" alt="">
                         </div>
                         <div class="product-body">
-                            <h3 class="product-name"><a href="#">{{$item->name}}</a></h3>
+                            <h3 class="product-name"><a href="{{ url('producto/'.$item->attributes->producto_slug) }}">{{$item->name}}</a></h3>
                             <h4 class="product-price"><span class="qty">{{$item->quantity}}x</span>{{$item->price}}</h4>
                         </div>
                         <form action="{{route('carrito.remover')}}" method="post">

@@ -4,6 +4,8 @@ use App\Category;
 use App\Product;
 use App\Image;
 use App\User;
+use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,72 +20,60 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
 
-});
+Route::get('prueba','Seguridad\ClienteLoginController@verusuario')->middleware('IsClient');
 
-Route::get('/prueba', function () {
-    
-   
-    return view('tienda.system.carrito_resumen');
-
-});
+Route::get('prueba2', function () {
+    return "eres admin";
+})->name('prueba2');
 
 
-// Route::get('/bienvenido', function () {
-//     return "Hola como estas";
-// });
 
-// Route::get('fotos/{id}',function($id_foto){
-//     return 'ests en la galeria de fotos '.$id_foto;
-// });
 
-// Route::get('/ejemplo/{nombre?}', function ($nombre=null) {
-//     return 'usuario->'.$nombre;
-
-// });
-
-// Route::get('user/{id}', 'Admin\AdminUserController@index')->name('nombredelaruta');
-
-Route::get('/hombre','Controller@hombre_catagolo');
-
-// Route::get('/ejemplo', function () {
-//     return view('/tienda/plantilla-categoria');
-// });
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
 /* ---Inicio admin--- */
-Route::get('/admin', function () {
-    return view('admin.system.admin_home');
-})->name('admin');
 
-/*------Acerca de Admin----- */
-Route::get('/admin/acerca_de', function () {
-    return view('admin.system.acerca_de');
+Route::post('seguridad/login','Seguridad\LoginController@login')->name('login_post');
+Route::get('seguridad/login','Seguridad\LoginController@index')->name('login');
+
+Route::get('seguridad/logout','Seguridad\LoginController@logout')->name('logout');
+
+Route::group(['prefix' => 'admin','middleware'=>'auth' ], function () {
+
+    Route::get('/', 'Admin\AdminController@index')->name('admin');
+
+    /*------Acerca de Admin----- */
+    Route::get('acerca_de', function () {
+        return view('admin.system.acerca_de');
+    });
+
+    Route::resource('user', 'Admin\AdminUserController')->names('admin.user');
+    Route::get('usuarios', 'Admin\AdminUserController@index');
+    /* ----Admin Categoria----- */
+
+    Route::resource('general_category', 'Admin\AdminGeneralCategoryController')->names('admin.general_category');
+    Route::resource('category', 'Admin\AdminCategoryController')->names('admin.category');
+
+    /* ---Admin Producto----- */
+    Route::resource('product', 'Admin\AdminProductController')->names('admin.product');
 });
+
 
 /* ----Manejo de usuarios------- */
 
 //para obtener todas las rutas del usuario
-Route::resource('admin/user','Admin\AdminUserController')->names('admin.user');
-Route::get('/admin/usuarios', 'Admin\AdminUserController@index');
+Route::resource('admin/user', 'Admin\AdminUserController')->names('admin.user');
+Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
 
-Route::resource('usuario','Tienda\UserController')->names('tienda.user');
-
-
-/* ----Admin Categoria----- */
-
-Route::resource('admin/general_category', 'Admin\AdminGeneralCategoryController')->names('admin.general_category');
-Route::resource('admin/category', 'Admin\AdminCategoryController')->names('admin.category');
-
-/* ---Admin Producto----- */
-Route::resource('admin/product', 'Admin\AdminProductController')->names('admin.product');
 
 Route::get('cancelar/{ruta}', function ($ruta) {
-    return redirect()->route($ruta)->with('cancelar','Accion cancelada');
+    return redirect()->route($ruta)->with('cancelar', 'Accion cancelada');
 })->name('cancelar');
+
+
+Route::get('/','Tienda\TiendaController@index')->name('inicio');
 
 /* ----Tienda Categorias----*/
 
@@ -98,3 +88,7 @@ Route::post('/carrito', 'Tienda\CarritoController@agregar')->name('carrito.agreg
 Route::get('/carrito_resumen', 'Tienda\CarritoController@resumen')->name('carrito.resumen');
 Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carrito.remover');
 Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');
+
+
+/* -----clientes------ */
+Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');

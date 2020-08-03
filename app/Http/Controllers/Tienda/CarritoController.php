@@ -32,7 +32,7 @@ class CarritoController extends Controller
             $producto->nombre,
             $producto->precio,
             $request->quantity,
-            array('imageurl'=>$imageurl)        
+            array('imageurl'=>$imageurl,'producto_slug'=>$producto->slug)        
         );
         return back()->with('succes','Producto agregado');
     }

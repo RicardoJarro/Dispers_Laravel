@@ -35,7 +35,7 @@
                 <div class="row">
                     <!-- LOGO -->
                     <div class="col-lg-3">
-                        <div class="header-logo"> <a href="index.html" class="logo">
+                        <div class="header-logo"> <a href="{{route('inicio')}}" class="logo">
 
                             <img src="/images/tienda/logo.png" alt="" width="220" height="60">
 

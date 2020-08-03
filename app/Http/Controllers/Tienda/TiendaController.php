@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Tienda;
 
 use App\Category;
+use App\GeneralCategory;
 use App\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TiendaController extends Controller
 {
+
+    public function index(){
+        $categorias=GeneralCategory::with('categories')->get();
+        //return $categorias;
+        return view('tienda.index',compact('categorias'));
+    }
 
     //muestra un producto especifico
     public function producto($slug)
