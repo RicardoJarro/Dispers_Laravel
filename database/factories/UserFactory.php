@@ -26,6 +26,6 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'admin'=>'si',
         'password' => bcrypt('1234'), // password
-        'estado'=> '1',
+        'estado'=> 'activo',
     ];
 });

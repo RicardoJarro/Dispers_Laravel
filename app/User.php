@@ -19,4 +19,8 @@ class User extends Model
     public function image(){
         return $this->morphOne('App\Image','imageable');
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

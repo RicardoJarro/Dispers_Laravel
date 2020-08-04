@@ -15,9 +15,9 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>150</h3>
+        <h3>{{$num_ordenes}}</h3>
 
-          <p>Nuevas Ordenes</p>
+          <p>Ordenes Pendientes</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
@@ -45,7 +45,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>345</h3>
+        <h3>{{$num_usuarios}}</h3>
 
           <p>Usuarios Registrados</p>
         </div>

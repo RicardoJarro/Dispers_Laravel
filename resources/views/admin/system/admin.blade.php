@@ -108,7 +108,7 @@
           <img  src="{{URL::asset('/images/admin/admin.png')}}"  class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">user @yield('usuarioID')</a>
+          <a href="#" class="d-block"> @yield('usuarioID')</a>
         </div>
       </div>
 
@@ -290,6 +290,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('inicio')}}" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+                Ir a dispers
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('logout')}}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
@@ -297,6 +305,7 @@
               </p>
             </a>
           </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

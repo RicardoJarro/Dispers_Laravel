@@ -41,8 +41,9 @@ class LoginController extends Controller
                 return redirect()->route('inicio');
             }
         }else{
+            return $this->sendFailedLoginResponse($request);
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('datos','Email-Address And Password Are Wrong.');
         }          
     }          
 }

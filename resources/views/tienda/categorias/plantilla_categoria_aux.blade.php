@@ -42,7 +42,7 @@
                 
                 <div class="w-100 d-inline">
                     <div class="product-catalog">
-                        <a href="producto.php">
+                        <a href="{{ url('producto/'.$item->slug) }}">
                             @if(!$item->images->isEmpty())
                             <img src={{$item->images[0]->url}}>
                             @else

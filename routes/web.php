@@ -3,7 +3,9 @@
 use App\Category;
 use App\Product;
 use App\Image;
+use App\Order;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,18 +20,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-Route::get('prueba','Seguridad\ClienteLoginController@verusuario')->middleware('IsClient');
-
-Route::get('prueba2', function () {
-    return "eres admin";
-});
-
-
-
-
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
@@ -75,11 +65,13 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function
     Route::get('user/cambiar/{id}','Admin\AdminUserController@cambiar_rol')->name('admin.cambiar_rol');
     Route::get('client', 'Admin\AdminUserController@index2')->name('admin.user.index2');
     Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
+
+    Route::get('pedidos','Admin\AdminOrderController@index')->name('admin.order.index');
     
 });
 
-Route::get('perfil','Tienda\UserController@verperfil')->middleware('auth');
-Route::post('perfil','Tienda\UserController@actualizar')->name('user.actualizar');
+Route::get('/perfil','Tienda\UserController@verperfil')->name('perfil')->middleware('auth');
+Route::post('/perfil','Tienda\UserController@actualizar')->name('user.actualizar');
 
 
 Route::get('cancelar/{ruta}', function ($ruta) {
@@ -91,11 +83,11 @@ Route::get('/','Tienda\TiendaController@index')->name('inicio');
 
 /* ----Tienda Categorias----*/
 
-Route::get('categoria/{category_slug}/{subcategory_slug?}', 'Tienda\CategoryController@index')->name('tienda.categoria');
+Route::get('/categoria/{category_slug}/{subcategory_slug?}', 'Tienda\CategoryController@index')->name('tienda.categoria');
 
 /* -----Tienda Producto Especifico */
 
-Route::get('producto/{producto_slug}', 'Tienda\TiendaController@producto')->name('tienda.prodcuto');
+Route::get('/producto/{producto_slug}', 'Tienda\TiendaController@producto')->name('tienda.prodcuto');
 
 /* -----Carrito Compras----- */
 Route::post('/carrito', 'Tienda\CarritoController@agregar')->name('carrito.agregar');
@@ -103,7 +95,10 @@ Route::get('/carrito_resumen', 'Tienda\CarritoController@resumen')->name('carrit
 Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carrito.remover');
 Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');
 Route::get('/registro','Tienda\UserController@ver_fomulario')->name('user.registro');
-Route::post('/registro','Tienda\UserController@registrar')->name('user.registro_post');
+Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('procesar_orden_post');
+
+
+
 
 /* -----clientes------ */
 //Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
@@ -111,6 +106,12 @@ Route::post('/registro','Tienda\UserController@registrar')->name('user.registro_
 //Route::get('cliente/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
 
 
+Route::get('/pedido','Tienda\CompraController@compra')->name('confirmar_comprar');
 
+Route::get('/prueba', function () {
+    return User::with('orders.order_details')->find(31);
+});
 
-Route::get('pedido','Tienda\CompraController@compra')->name('confirmar_comprar');
+Route::get('/compra/{id}','Tienda\CompraController@ver_compra')->name('ver_compra');
+
+Route::get('compras','Tienda\CompraController@listar_compras')->name('ver_compras');

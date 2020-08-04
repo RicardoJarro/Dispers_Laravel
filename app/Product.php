@@ -14,4 +14,9 @@ class Product extends Model
     public function images(){
         return $this->MorphMany('App\Image','imageable');
     }
+
+    public function orders(){
+        return $this->hasMany(OrderDetail::class);
+    }
+
 }

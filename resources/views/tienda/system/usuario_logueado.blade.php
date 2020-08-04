@@ -4,8 +4,8 @@
     <div class="btn-group " id="boton-cuenta">
         <button type="button" class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o"></i> Cuenta</button>
         <div class="dropdown-menu">
-            <a href="perfil.php" class="dropdown-item"> <i class="fa fa-user-o"></i> Perfil de usuario </a>
-            <br> <a href="compras_realizadas.php" class="dropdown-item"> <i class="fa fa-list-ol" aria-hidden="true"></i> Listar compras </a>            
+            <a href="{{route('perfil')}}" class="dropdown-item"> <i class="fa fa-user-o"></i> Perfil de usuario </a>
+            <br> <a href="{{route('ver_compras')}}" class="dropdown-item"> <i class="fa fa-list-ol" aria-hidden="true"></i> Listar compras </a>            
             <br> <a href="{{route('logout')}}" class="dropdown-item"> <i class="fa fa-times" aria-hidden="true"></i> Cerrar Sesion </a>
         </div>
     </div>

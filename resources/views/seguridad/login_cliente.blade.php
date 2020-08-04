@@ -16,6 +16,7 @@
                 @csrf
                 <div class="form-group">
                     <h2>Inicio de sesión</h2>
+                    
                     @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
