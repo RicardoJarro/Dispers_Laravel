@@ -176,7 +176,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Testimonios de Clientes</h2>
-              <br></br>
+              <br>
                 </div>
                 <ul class="timeline">
                     <li>

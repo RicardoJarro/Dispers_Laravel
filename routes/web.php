@@ -66,8 +66,13 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function
     Route::get('client', 'Admin\AdminUserController@index2')->name('admin.user.index2');
     Route::resource('usuario', 'Tienda\UserController')->names('tienda.user');
 
-    Route::get('pedidos','Admin\AdminOrderController@index')->name('admin.order.index');
-    
+    Route::get('pedidos/pendientes','Admin\AdminOrderController@index')->name('admin.order.index');
+    //Route::get('factura','Admin\AdminOrderController@ver_factura')->name('admin.order.factura');
+    Route::post('factura','Admin\AdminOrderController@ver_factura')->name('admin.order.factura');
+    Route::get('pedido/{id}','Admin\AdminOrderController@ver_factura_get')->name('admin.order.factura_get');
+
+    Route::get('pedidos/todos','Admin\AdminOrderController@todos')->name('admin.order.todos');
+    Route::get('pedido/{id}/cambiar_estado','Admin\AdminOrderController@cambiar_estado')->name('admin.cambiar.pedido');
 });
 
 Route::get('/perfil','Tienda\UserController@verperfil')->name('perfil')->middleware('auth');

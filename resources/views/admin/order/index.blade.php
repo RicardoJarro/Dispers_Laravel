@@ -4,22 +4,38 @@
 @section('breadcrumb')
   <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
+@section('estilos')
 
+<style>
+  .btn_input {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  /* text-decoration: underline; */
+  cursor: pointer;
+}
+</style>
+    
+@endsection
 
 @section('contenido')
 
 <!-- TABLE: LATEST ORDERS -->
 <div class="card">
     <div class="card-header border-transparent">
-      <h3 class="card-title">Latest Orders</h3>
+      <h3 class="card-title">Compras pendientes</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
           <i class="fas fa-minus"></i>
         </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove">
+        {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
           <i class="fas fa-times"></i>
-        </button>
+        </button> --}}
       </div>
     </div>
     <!-- /.card-header -->
@@ -28,78 +44,51 @@
         <table class="table m-0">
           <thead>
           <tr>
-            <th>Order ID</th>
+            <th>Pedido ID</th>
             <th>Item</th>
-            <th>Status</th>
-            <th>Popularity</th>
+            <th>Estado</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Acciones</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-            <td>Call of Duty IV</td>
-            <td><span class="badge badge-success">Shipped</span></td>
-            <td>
-              <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-            <td>Samsung Smart TV</td>
-            <td><span class="badge badge-warning">Pending</span></td>
-            <td>
-              <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-            <td>iPhone 6 Plus</td>
-            <td><span class="badge badge-danger">Delivered</span></td>
-            <td>
-              <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-            <td>Samsung Smart TV</td>
-            <td><span class="badge badge-info">Processing</span></td>
-            <td>
-              <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-            <td>Samsung Smart TV</td>
-            <td><span class="badge badge-warning">Pending</span></td>
-            <td>
-              <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-            <td>iPhone 6 Plus</td>
-            <td><span class="badge badge-danger">Delivered</span></td>
-            <td>
-              <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-            <td>Call of Duty IV</td>
-            <td><span class="badge badge-success">Shipped</span></td>
-            <td>
-              <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-            </td>
-          </tr>
+            @forelse ($pedidos as $pedido)
+            <tr>            
+              <td>
+                <form name="myform" action="{{route('admin.order.factura')}}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{$pedido->id}}">
+                <input type="submit" class="btn_input" value="{{$pedido->id}}">
+                  {{-- <a href="#" onclick="event.preventDefault(); this.parentNode.submit()">{{$pedido->id}}</a> --}}
+                  {{-- <a href="pages/examples/invoice.html"></a> --}}
+                </form>
+
+              </td>
+              <td>{{$pedido->order_details[0]->nombre_producto}}...</td>
+              <td><span class="badge badge-warning">{{$pedido->estado}}</span></td>
+              <td>{{$pedido->nombre_completo}}</td>
+              <td>
+                <div class="sparkbar" data-color="#00a65a" data-height="20">${{$pedido->total}}</div>
+              </td>
+              <td>
+              <a href="{{route('admin.cambiar.pedido',$pedido->id)}}" class="btn btn-block btn-outline-success "> Enviado</a>
+                      </td>
+            </tr>
+            @empty
+                
+            @endforelse
+          
           </tbody>
         </table>
+        {{ $pedidos->appends($_GET)->links() }}
       </div>
       <!-- /.table-responsive -->
     </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-      <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-      <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+      {{-- <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a> --}}
+    <a href="{{route('admin.order.todos')}}" class="btn btn-sm btn-secondary float-right">Ver todos los pedidos</a>
     </div>
     <!-- /.card-footer -->
   </div>

@@ -108,7 +108,9 @@
           <img  src="{{URL::asset('/images/admin/admin.png')}}"  class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> @yield('usuarioID')</a>
+          <a href="#" class="d-block"> @auth
+            {{ Auth::user()->nombre }}
+            @endauth</a>
         </div>
       </div>
 
@@ -199,15 +201,15 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('admin.category.index')}}" class="nav-link">
+                  <a href="{{ route('admin.order.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Lista de Pedidos</p>
+                    <p>Pedidos pendientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('admin.category.create')}}" class="nav-link">
+                  <a href="{{ route('admin.order.todos')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Modificar Pedido</p>
+                    <p>Todos los pedidos</p>
                   </a>
                 </li>
                
