@@ -22,4 +22,4 @@ Route::apiResource('product','API\ProductController')->names('api.product');
 Route::apiResource('category','API\CategoryController')->names('api.category');
 Route::apiResource('general_category','API\GeneralCategoryController')->names('api.generalcategory');
 Route::delete('/eliminarimagen/{id}','API\ProductController@eliminarimagen')->name('api.eliminarimagen');
-Route::get('/app/service','API\ServicioController@index');
+Route::get('service','API\ServicioController@index');
