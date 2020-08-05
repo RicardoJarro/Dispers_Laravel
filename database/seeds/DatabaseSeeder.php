@@ -12,12 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->truncateTablas(['rols','users','categories','products']);
+        //'products'
+        $this->truncateTablas(['rols','users','categories']);
 
         $this->call(RolTableSeeder::class);
         $this->call(UserTableSeeder::class);        
         $this->call(CategoryTableSeeder::class);
-        $this->call(ProductTableSeeder::class);
+        $this->call(AdminTableSeeder::class);
+        //$this->call(ProductTableSeeder::class);
         //$this->call(ClientTableSeeder::class);
     }
 

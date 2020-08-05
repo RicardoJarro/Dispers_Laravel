@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm"><br>
-            <form action="{{route('user.registro_post')}}" class="form-horizontal" method="post">
+            <form action="{{route('login_post')}}" class="form-horizontal" method="post">
                 @csrf
                     <fieldset>
 
