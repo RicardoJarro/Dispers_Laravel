@@ -20,9 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('nickname',50)->unique();
             $table->string('slug',50)->unique();            
             $table->string('email',50)->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('estado',10)->default('activo');
             $table->string('admin',15)->default('si');
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }

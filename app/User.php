@@ -10,7 +10,7 @@ class User extends Model
     public $incrementing = false;
     public $timestamps = true;
 
-    protected $fillable = ['name','created_at','updated_at'];
+    protected $fillable = ['name','email', 'password','created_at','updated_at','provider', 'provider_id'];
 
     // public function rols(){
     //     return $this->belongsToMany('App\Rol');

@@ -59,6 +59,8 @@
                         <i class="fab fa-facebook"></i>
                         <input disabled=»disabled» type="button-fb" value="Facebook" class="button1">
                     </div>
+                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+
                     <br>
 
                     <div class="button-google btn-danger">

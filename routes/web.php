@@ -114,9 +114,32 @@ Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('
 Route::get('/pedido','Tienda\CompraController@compra')->name('confirmar_comprar');
 
 Route::get('/prueba', function () {
-    return User::with('orders.order_details')->find(31);
+    $pedido=Order::with('order_details.product')->find(1);
+     $fecha=Carbon::now()->toDateTimeString();
+
+    return view('tienda.compra.factura_enviar',compact('pedido','fecha'));
 });
 
 Route::get('/compra/{id}','Tienda\CompraController@ver_compra')->name('ver_compra');
 
 Route::get('compras','Tienda\CompraController@listar_compras')->name('ver_compras');
+
+
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+  Route::get('/callback/{provider}', 'SocialController@callback');
+
+/* ----PDF----- */
+Route::get('/pdf', 'PDFController@index')->name('descargarPDF');
+Route::get('/pdfcategorias', 'PDFController@PDFCategorias')->name('descargarPDFcategorias');
+Route::get('/pdfcategoriashorizontal', 'PDFController@PDFCategoriasHorizontal')->name('decargarPDFCategoriasHorizontal');
+Route::get('/guardarpdf', 'PDFController@guardarpdf')->name('guardarpdf');  
+
+
+
+/* ----Admin mashups---- */
+
+Route::resource('admin/mashupGoogleMaps','Mashups\MashupGooglemapsController')->names('admin.mashupgooglemaps');
+Route::resource('admin/mashupTwitter','Mashups\MashupTwitterController')->names('admin.mashuptwitter');
+Route::resource('admin/mashupGoogleCharts','Mashups\MashupGooglechartController')->names('admin.mashupgooglechart');
+Route::resource('admin/mashupFacebook','Mashups\MashupFacebookController')->names('admin.mashupfacebook');
+Route::resource('admin/mashupInstagram','Mashups\MashupInstagramController')->names('admin.mashupinstagram');
