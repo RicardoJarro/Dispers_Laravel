@@ -94,6 +94,8 @@
                 <div class="form-group center">
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-danger">Confirmar Compra</button>
+                <a href="{{url('/paypal/pay')}}" class="btn btn-primary">  PAYPAL</a>
+
                     <!-- <a href="pago.php"><button class="btn btn-danger">Confirmar compra</button></a> -->
                 </div>
             </form>

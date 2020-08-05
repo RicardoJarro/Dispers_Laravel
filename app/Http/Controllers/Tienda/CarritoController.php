@@ -62,9 +62,7 @@ class CarritoController extends Controller
     public function procesarPedido(Request $request){
 
         
-        if(Cart::getContent()->count()>0){
-            
-            
+        if(Cart::getContent()->count()>0){                        
             $pedido=new Order();
             $pedido->fecha_creacion=Carbon::now()->toDateTimeString();
             $pedido->fecha_envio='';
@@ -74,7 +72,7 @@ class CarritoController extends Controller
             $pedido->iva=number_format(Cart::getSubTotal()*0.12,2);
             $pedido->total=number_format(Cart::getTotal(),2)+number_format(Cart::getTotal()*0.12,2);
             $pedido->estado='pendiente';
-            $pedido->estado_compra='pagado';
+            $pedido->estado_compra='pendiente';
             $pedido->direccion=$request->direccion;
             $pedido->detalle=$request->detalle;
             $pedido->ciudad=$request->ciudad;        
@@ -96,7 +94,9 @@ class CarritoController extends Controller
             endforeach;
 
             Cart::clear();
-            return redirect()->route('ver_compra', ['id' => $pedido->id]);
+            return redirect()->route('pago_paypal', ['id' => $pedido->id,'usd'=>$pedido->total]);
+            // return redirect()->route('ver_compra', ['id' => $pedido->id]);
+
         }else{
             return redirect()->route('inicio');
         }

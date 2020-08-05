@@ -143,10 +143,10 @@
                                         <p class="lead">Payment Methods:</p>
 
 
-                                        {{-- <img src="{{URL::asset('images/credit/visa.png')}}">
+                                        <img src="{{URL::asset('images/credit/visa.png')}}">
                                         <img src="{{URL::asset('images/credit/mastercard.png')}}">
                                         <img src="{{URL::asset('images/credit/american-express.png')}}">
-                                        <img src="{{URL::asset('images/credit/paypal2.png')}}"> --}}
+                                        <img src="{{URL::asset('images/credit/paypal2.png')}}">
 
 
 

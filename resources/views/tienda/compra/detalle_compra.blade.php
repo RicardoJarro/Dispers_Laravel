@@ -53,7 +53,7 @@
 
 
                             <!-- Main content -->
-                            <div class="invoice p-3 mb-3">
+                            <div class="invoice p-3 mb-3" id="factura">
                                 <!-- title row -->
                                 <div class="row">
                                     <div class="col-12">
@@ -181,12 +181,12 @@
                                 <!-- this row will not appear when printing -->
                                 <div class="row no-print">
                                     <div class="col-12">
-                                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
-                                                class="fas fa-print"></i> Print</a>
+                                        {{-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
+                                                class="fas fa-print"></i> Print</a> --}}
                                         <button type="button" class="btn btn-success float-right"><i
                                                 class="far fa-credit-card"></i> Enviar a correo
                                         </button>
-                                        <button type="button" class="btn btn-primary float-right"
+                                        <button type="button" onclick="myFunction()" class="btn btn-primary float-right"
                                             style="margin-right: 5px;">
                                             <i class="fas fa-download"></i> Generar PDF
                                         </button>
@@ -214,5 +214,22 @@
     function goBack() {
       window.history.back();
     }
+</script>
+<script type="text/javascript">
+    function myFunction() {
+    //     console.log('adf');
+        
+    //    window.print();
+
+    var prtContent = document.getElementById("factura");
+var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+WinPrint.document.write(prtContent.innerHTML);
+WinPrint.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >');
+WinPrint.document.close();
+WinPrint.focus();
+WinPrint.print();
+// WinPrint.close();
+    }
+        
 </script>
 @endsection

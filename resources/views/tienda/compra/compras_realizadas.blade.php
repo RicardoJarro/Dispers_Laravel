@@ -13,6 +13,15 @@
 <hr>
 <div id="container-compras" class="no-seleccionable">
 
+    @if( session('status') )
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ session('datos') }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+
     <!-- plantilla -->
     @forelse($compras->orders as $compra)
     <div class="compra-unitaria border m-2 rounded p-2 mano position-relative" id="item-pedido-unitario">

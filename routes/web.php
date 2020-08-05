@@ -143,3 +143,7 @@ Route::resource('admin/mashupTwitter','Mashups\MashupTwitterController')->names(
 Route::resource('admin/mashupGoogleCharts','Mashups\MashupGooglechartController')->names('admin.mashupgooglechart');
 Route::resource('admin/mashupFacebook','Mashups\MashupFacebookController')->names('admin.mashupfacebook');
 Route::resource('admin/mashupInstagram','Mashups\MashupInstagramController')->names('admin.mashupinstagram');
+
+
+Route::get('/paypal/pay/{id}/{usd}', 'PaymentController@payWithPayPal')->name('pago_paypal');
+Route::get('/paypal/status', 'PaymentController@payPalStatus');

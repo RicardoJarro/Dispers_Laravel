@@ -54,19 +54,20 @@
 
 
                     <h5>Inicia sesión con tu cuenta de : </h5>
-
+                    <a href="{{ url('/auth/redirect/facebook') }}" >
                     <div class="button-facebook">
                         <i class="fab fa-facebook"></i>
-                        <input disabled=»disabled» type="button-fb" value="Facebook" class="button1">
-                    </div>
-                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+                         Facebook
+                        {{-- <input disabled=»disabled» type="button-fb" value="Facebook" class="button1"> --}}
+                    </div></a>
+                    
 
                     <br>
 
-                    <div class="button-google btn-danger">
+                    {{-- <div class="button-google btn-danger">
                         <i class="fab fa-google btn-danger"></i>
                         <input disabled=»disabled» type="button-g" value="Google" class="button1 btn-danger">
-                    </div>
+                    </div> --}}
 
                 </div>
             </form>
