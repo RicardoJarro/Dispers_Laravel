@@ -35,10 +35,6 @@ Route::get('seguridad/logout','Seguridad\LoginController@logout')->name('logout'
 // Route::get('cliente/lo','Seguridad\ClienteController@logout')->name('logout.cliente');
 
 
-
-
-
-
 Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function () {
 
     Route::get('/', 'Admin\AdminController@index')->name('admin');
@@ -109,6 +105,7 @@ Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('
 //Route::get('/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
 
 //Route::get('cliente/login', 'Seguridad\ClienteLoginController@index')->name('login.cliente');
+
 
 
 Route::get('/pedido','Tienda\CompraController@compra')->name('confirmar_comprar');
