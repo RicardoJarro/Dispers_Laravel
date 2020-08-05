@@ -22,6 +22,13 @@ class DatabaseSeeder extends Seeder
     }
 
     protected function truncateTablas(array $tablas){
+        //your code
+
+        foreach ($tablas as $tabla){
+            DB::statement("TRUNCATE TABLE {$tablas} RESTART IDENTITY CASCADE");
+            
+        }
+
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         foreach ($tablas as $tabla){
             DB::table($tabla)->truncate();
