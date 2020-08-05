@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email',50)->unique();
             $table->string('password')->nullable();
             $table->string('estado',10)->default('activo');
-            $table->string('admin',15)->default('si');
+            $table->string('admin',15)->default('no');
             $table->string('provider')->default('dispers');
             $table->string('provider_id')->nullable();
             // $table->timestamp('email_verified_at')->nullable();

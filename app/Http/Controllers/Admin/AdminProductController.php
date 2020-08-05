@@ -63,7 +63,7 @@ class AdminProductController extends Controller
         $prod = new Product;
         $prod->nombre=$request->nombre;
         $prod->slug=$request->slug;
-        $prod->descripcion='asd';//$request->descripcion;
+        $prod->descripcion=$request->descripcion;//$request->descripcion;
         $prod->category_id=$request->category_id;
         $prod->precio=$request->precio;
         $prod->peso=$request->peso;
