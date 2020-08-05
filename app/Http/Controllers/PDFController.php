@@ -38,7 +38,7 @@ class PDFController extends Controller
      $pedido=Order::with('order_details.product')->find(1);
      $fecha=Carbon::now()->toDateTimeString();
     //  $pdf = (\PDF::loadView('usuarios',compact('users')))->setPaper('a4','landscape');
-    $pdf = (PDF::loadView('tienda.compra.factura_enviar',compact('pedido','fecha')))->setPaper('a4','landscape');
+        $pdf = (PDF::loadView('tienda.compra.factura_enviar',compact('pedido','fecha')))->setPaper('a4','landscape');
 
     // $categorias = Category::all();
     //  $pdf = PDF::loadView('admin.category.pdfcategoryhorizontal',compact('categorias'));
@@ -49,7 +49,7 @@ class PDFController extends Controller
      $data["subject"]=$request->get("Gracias por comprar");
 
          Mail::send('welcome', $data, function($message)use($data,$pdf) {
-         $message->to("juanc.lazol@ucuenca.edu.ec", "Juan")
+         $message->to("jaio1998619@gmail.com", "Juan")
          ->subject("Gracias por comprar ")
          ->attachData($pdf->output(), "invoice.pdf");
          });
