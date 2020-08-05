@@ -25,14 +25,14 @@ class DatabaseSeeder extends Seeder
         //your code
 
         foreach ($tablas as $tabla){
-            DB::statement("TRUNCATE TABLE {$tablas} RESTART IDENTITY CASCADE");
+            DB::statement("TRUNCATE TABLE {$tabla} RESTART IDENTITY CASCADE");
             
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        foreach ($tablas as $tabla){
-            DB::table($tabla)->truncate();
-        }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // foreach ($tablas as $tabla){
+        //     DB::table($tabla)->truncate();
+        // }
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
