@@ -84,7 +84,7 @@ Route::get('todos_categorias', function () {
 });
 //devuelve todos los imagenes tooodos
 Route::get('todas_imagenes', function ($id) {
-    
+    return Image::get();
 });
 
 
