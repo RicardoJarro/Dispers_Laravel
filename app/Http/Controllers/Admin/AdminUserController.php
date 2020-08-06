@@ -26,7 +26,8 @@ class AdminUserController extends Controller
     public function index2()
     {
         // Imprime los datos de la tabla usuario en un rango de 10 filas
-        $users=User::where('admin','no')->paginate(10);        
+        //$users=User::where('admin','no')->paginate(10);        
+        $users=User::paginate(7);  
         return view('admin.user.index2',compact('users'));
     }
 

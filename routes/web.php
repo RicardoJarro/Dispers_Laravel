@@ -74,6 +74,8 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function
 
     Route::get('pedidos/todos','Admin\AdminOrderController@todos')->name('admin.order.todos');
     Route::get('pedido/{id}/cambiar_estado','Admin\AdminOrderController@cambiar_estado')->name('admin.cambiar.pedido');
+
+    Route::get('compras/user/{id}','Admin\AdminOrderController@ver_compras_cliente')->name('compras_cliente');
 });
 
 Route::get('/perfil','Tienda\UserController@verperfil')->name('perfil')->middleware('auth');

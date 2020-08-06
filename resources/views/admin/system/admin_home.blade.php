@@ -22,7 +22,7 @@
         <div class="icon">
           <i class="ion ion-bag"></i>
         </div>
-        <a href="#" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('admin.order.index')}}" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -30,14 +30,15 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
+        <h3>$ {{$ganancia}}<sup style="font-size: 20px"></sup></h3>
 
-          <p>Porcentaje Minecra</p>
+          <p>Ganancias</p>
         </div>
         <div class="icon">
-          <i class="ion ion-stats-bars"></i>
+          <i class="fas fa-dollar-sign"></i>
+          {{-- <i class="ion ion-stats-bars"></i> --}}
         </div>
-        <a href="#" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('admin.order.todos')}}" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -52,22 +53,22 @@
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('admin.user.index2')}}" class="small-box-footer">Mas Información <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-6">
       <!-- small box -->
-      <div class="small-box bg-danger">
+      <div class="small-box " style="background-color: #48C9B0 ">
         <div class="inner">
-          <h3>65</h3>
+          <h3>{{$num_productos}}</h3>
 
-          <p>Visitantes</p>
+          <p>Productos en linea</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="fas fa-tshirt"></i>
         </div>
-        <a href="#" class="small-box-footer">Mas Información<i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{route('admin.product.index')}}" class="small-box-footer">Mas Información<i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

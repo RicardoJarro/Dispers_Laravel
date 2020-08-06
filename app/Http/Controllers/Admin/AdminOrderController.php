@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -39,5 +40,12 @@ class AdminOrderController extends Controller
         $pedido=Order::with('order_details.product')->find($id);
         $fecha=Carbon::now()->toDateTimeString();
          return view('admin.order.factura',compact('pedido','fecha'));
+    }
+
+
+    public function ver_compras_cliente($id){
+        $pedidos=Order::with('user')->where('user_id',$id)->paginate(7);
+        $user=User::find($id);
+        return view('admin.user.compras_usuario',compact('pedidos','user'));
     }
 }

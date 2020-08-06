@@ -69,7 +69,7 @@ class PaymentController extends Controller
 
         try {
             $payment->create($this->apiContext);
-            $order = Order::where('id', $id)->update(array('estado'=> 'pagado'));
+            $order = Order::where('id', $id)->update(array('estado_compra'=> 'pagado'));
             return redirect()->away($payment->getApprovalLink());
         } catch (PayPalConnectionException $ex) {
             echo $ex->getData();
