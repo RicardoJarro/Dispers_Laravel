@@ -42,13 +42,10 @@ Route::get('categorias/{id}', function ($id) {
 });
 
 
-
-
 //devuelve todas los productos en una subcategoria
 Route::get('subcategoria/{id}', function ($id) {
     return Product::where('category_id',$id)->get();
 });
-
 
 
 //devuelve las imagenes de un producto
@@ -74,9 +71,12 @@ Route::get('imagen/{id}',function($id){
 Route::get('todos_productos', function () {
     return Product::get();
 });
+
+
 //devuelve todos los subcategorias tooodos
 Route::get('todos_subcategorias', function () {
     return Category::get();
+    
 });
 //devuelve todos los categoriastooodos
 Route::get('todos_categorias', function () {
