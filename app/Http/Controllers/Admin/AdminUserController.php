@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AdminUserController extends Controller
 {
@@ -48,6 +49,7 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
+        
         //$datosUsers=request()->all();
         //trae los daots de la peticion exceptuando el toque que le ppone por defecto laravel
         $pass=bcrypt($request->password);        
@@ -56,9 +58,15 @@ class AdminUserController extends Controller
         ]); 
         
         $datosUsers=request()->except('_token');
-        User::insert($datosUsers);
+        try {
+            User::insert($datosUsers);
+            return redirect()->route('admin.user.index')->with('datos','Administrador agregado con exito');
+        } catch (\Illuminate\Database\QueryException $ex) {
+            return redirect()->route('admin.user.create')->with('error','El correo ya esta vinculado con otra cuenta');
+        }
+        
 
-        return redirect()->route('admin.user.index')->with('datos','Administrador agregado con exito');
+        
     }
 
     /**

@@ -25,4 +25,12 @@ class TiendaController extends Controller
         $productosRelacionados=Product::with('images')->where('category_id',$producto->category->id)->inRandomOrder()->limit(7)->get();
         return view('tienda.productos.producto',compact('producto','var','productosRelacionados'));
     }
+
+
+    public function asistencia(){
+        return view('tienda.informacion.formulario');
+    }
+    public function faqs(){
+        return view('tienda.informacion.faqs');
+    }
 }

@@ -13,7 +13,7 @@
                     </li>
                     <li><a href="https://www.google.es/maps/place/Universidad+De+Cuenca/@-2.9002615,-79.0120829,17.3z/data=!4m5!3m4!1s0x91cd180d08006233:0x59ff5aaba4301326!8m2!3d-2.9006441!4d-79.0102078"><i class="fa fa-map-marker"></i> ubicacion</a>
                     </li>
-                    <li><a href="formulario.php"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Asistencia</a>
+                <li><a href="{{route('asistencia')}}"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Asistencia</a>
                     </li>
                 </ul>
             </div>

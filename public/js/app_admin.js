@@ -14872,6 +14872,94 @@ var apiproduct = new Vue({
 
 /***/ }),
 
+/***/ "./resources/js/admin/apiuser.js":
+/*!***************************************!*\
+  !*** ./resources/js/admin/apiuser.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var apiuser = new Vue({
+  el: '#apiuser',
+  data: {
+    nickname: '',
+    slug: '',
+    div_mensajeslug: 'Nickname Existe',
+    div_clase_slug: 'badge badge-danger',
+    div_aparecer: false,
+    deshabilitar_boton: 1
+  },
+  computed: {
+    generarSLug: function generarSLug() {
+      var _char = {
+        "á": "a",
+        "é": "e",
+        "í": "i",
+        "ó": "o",
+        "ú": "u",
+        "Á": "A",
+        "É": "E",
+        "Í": "I",
+        "Ó": "O",
+        "Ú": "U",
+        "ñ": "n",
+        "Ñ": "N",
+        " ": "-",
+        "_": "-"
+      };
+      var expr = /[áéíóúÁÉÍÓÚÑñ_ ]/g;
+      this.slug = this.nickname.trim().replace(expr, function (e) {
+        return _char[e];
+      }).toLowerCase();
+      return this.slug; //return this.nombre.trim().replace(/ /g,'-').toLowerCase()
+    }
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      if (this.slug) {
+        var url = '/api/user/' + this.slug;
+        axios.get(url).then(function (response) {
+          _this.div_mensajeslug = response.data;
+
+          if (_this.div_mensajeslug === "Nickname Disponible") {
+            _this.div_clase_slug = 'badge badge-success';
+            _this.deshabilitar_boton = 0;
+          } else {
+            _this.div_clase_slug = 'badge badge-danger';
+            _this.deshabilitar_boton = 1;
+          }
+
+          _this.div_aparecer = true;
+
+          if (document.getElementById('editar')) {
+            if (document.getElementById('nombretemp').innerHTML === _this.nickname) {
+              _this.deshabilitar_boton = 0;
+              _this.div_mensajeslug = '';
+              _this.div_clase_slug = '';
+              _this.div_aparecer = false;
+            }
+          }
+        });
+      } else {
+        this.div_clase_slug = 'badge badge-danger';
+        this.div_mensajeslug = "Debes escribir un usuario";
+        this.deshabilitar_boton = 1;
+        this.div_aparecer = true;
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (document.getElementById('editar')) {
+      this.nickname = document.getElementById('nombretemp').innerHTML;
+      this.deshabilitar_boton = 0;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app_admin.js":
 /*!***********************************!*\
   !*** ./resources/js/app_admin.js ***!
@@ -14983,6 +15071,10 @@ if (document.getElementById('apigeneralcategory')) {
 
 if (document.getElementById('apiproduct')) {
   __webpack_require__(/*! ./admin/apiproduct */ "./resources/js/admin/apiproduct.js");
+}
+
+if (document.getElementById('apiuser')) {
+  __webpack_require__(/*! ./admin/apiuser */ "./resources/js/admin/apiuser.js");
 } // if (document.getElementById('confirmareliminar')) {
 //     require('./confirmareliminar');
 // }

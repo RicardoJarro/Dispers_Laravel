@@ -47,7 +47,7 @@
                             <input type="submit" value="Iniciar" class="button btn btn-danger">
                             {{-- <p><a href="">Olvido su contraseña</a></p> --}}
                             <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-                            <p>¿No tienes una cuenta? <a class="link" href="registrar_usuarios.php">Registrate </a></p>
+        <p>¿No tienes una cuenta? <a class="link" href="{{route('user.registro')}}">Registrate </a></p>
                     </div>
 
                     <hr>

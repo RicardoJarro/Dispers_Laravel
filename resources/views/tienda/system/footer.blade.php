@@ -39,7 +39,7 @@
                                 <li><a href="https://www.google.es/maps/place/Universidad+De+Cuenca/@-2.9002615,-79.0120829,17.3z/data=!4m5!3m4!1s0x91cd180d08006233:0x59ff5aaba4301326!8m2!3d-2.9006441!4d-79.0102078"><i class="fa fa-map-marker"></i>Ubicacion</a></li>
                                 <li><a href="#"><i class="fa fa-phone"></i>+593989100245</a></li>
                                 <li><a href="#"><i class="fa fa-envelope-o"></i>dispers.store@email.com</a></li>
-                                <li><a href="preguntasfrecuentes"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> FAQs</a></li>
+                            <li><a href="{{route('faqs')}}"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> FAQs</a></li>
                             </ul>
                         </div>
                     </div>

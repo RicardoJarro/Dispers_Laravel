@@ -21,6 +21,9 @@ if (document.getElementById('apigeneralcategory')) {
 if (document.getElementById('apiproduct')) {
     require('./admin/apiproduct');
 }
+if (document.getElementById('apiuser')) {
+    require('./admin/apiuser');
+}
 
 // if (document.getElementById('confirmareliminar')) {
 //     require('./confirmareliminar');

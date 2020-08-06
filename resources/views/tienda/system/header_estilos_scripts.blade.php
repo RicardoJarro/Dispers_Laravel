@@ -15,5 +15,6 @@
     <link href=" {!! asset('css/tienda/estilo_header_footer.css') !!}" rel="stylesheet">
     <link rel="stylesheet" href="{!! asset('css/tienda/estilo_catalogo.css')!!}">
     <script src="https://kit.fontawesome.com/63fafe2dae.js" crossorigin="anonymous"></script>
+
     
 

@@ -145,7 +145,8 @@ class UserController extends Controller
             $datosUsers = request()->except(['_token', '_method', 'confirm_password']);
             User::insert($datosUsers);
         } catch (\Illuminate\Database\QueryException $ex) {
-            dd($ex->getMessage());
+           
+            return redirect()->route('user.registro')->with('error', 'El correo ya esta vincuado con otra cuenta');
         }
         return redirect('login')->with('datos', 'Usuario registrado');
     }

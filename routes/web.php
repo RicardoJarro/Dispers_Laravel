@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 /* ------RUTAS QUE YA VAN A QUEDARSE-------- */
 
+
+Route::get('/','Tienda\TiendaController@index')->name('inicio');
+
+
 /* ---Inicio admin--- */
 
 Route::get('login','Seguridad\LoginController@index')->name('login');
@@ -74,6 +78,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'is_admin'] ], function
 
 Route::get('/perfil','Tienda\UserController@verperfil')->name('perfil')->middleware('auth');
 Route::post('/perfil','Tienda\UserController@actualizar')->name('user.actualizar');
+Route::post('resgistro_usuario','Tienda\UserController@registrar')->name('registrar_usuario');
+Route::get('/registro','Tienda\UserController@ver_fomulario')->name('user.registro');
+
 
 
 Route::get('cancelar/{ruta}', function ($ruta) {
@@ -81,7 +88,7 @@ Route::get('cancelar/{ruta}', function ($ruta) {
 })->name('cancelar');
 
 
-Route::get('/','Tienda\TiendaController@index')->name('inicio');
+
 
 /* ----Tienda Categorias----*/
 
@@ -96,9 +103,7 @@ Route::post('/carrito', 'Tienda\CarritoController@agregar')->name('carrito.agreg
 Route::get('/carrito_resumen', 'Tienda\CarritoController@resumen')->name('carrito.resumen');
 Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carrito.remover');
 Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');
-Route::get('/registro','Tienda\UserController@ver_fomulario')->name('user.registro');
 Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('procesar_orden_post');
-Route::post('resgistro_usuario','Tienda\UserController@registrar')->name('registrar_usuario');
 
 
 
@@ -152,6 +157,11 @@ Route::resource('admin/mashupGoogleCharts','Mashups\MashupGooglechartController'
 Route::resource('admin/mashupFacebook','Mashups\MashupFacebookController')->names('admin.mashupfacebook');
 Route::resource('admin/mashupInstagram','Mashups\MashupInstagramController')->names('admin.mashupinstagram');
 
+/* ----Pago Paypal---- */
 
 Route::get('/paypal/pay/{id}/{usd}', 'PaymentController@payWithPayPal')->name('pago_paypal');
 Route::get('/paypal/status', 'PaymentController@payPalStatus');
+
+/* ----Informacion asistencia---- */
+Route::get('/asistencia', 'Tienda\TiendaController@asistencia')->name('asistencia');
+Route::get('/faqs', 'Tienda\TiendaController@faqs')->name('faqs');
