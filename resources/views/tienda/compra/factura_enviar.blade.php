@@ -6,20 +6,28 @@
     <!-- Google font -->
     {{-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet"> --}}
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
     <!-- Iconos -->
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet"> --}}
     {{-- <script src="https://kit.fontawesome.com/63fafe2dae.js" crossorigin="anonymous"></script> --}}
 
     <link rel="stylesheet" href="{{ asset('css/estilospdfhorizontal.css') }}">    
+
 </head>
 <body>
     
+<style>
+    @media print {
+    @page {
+        size: auto;
+    }
+}
+</style>
 <div id="container-resumen-compra row">
     <div class="row">
         <div id="titulo-detalle-compra" class="col-11">
             <br>
-            <h1>Detalle del pedido </h1>
+            <h1>Factura</h1>
             <h3>#{{$pedido->id}}</h3>
         </div>
         <div class=" col-1 text-center my-auto">
@@ -38,7 +46,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Factura</h1>
+                            {{-- <h1>Factura</h1> --}}
                         </div>
                         {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -73,7 +81,7 @@
                                     <!-- /.col -->
                                 </div>
                                 <!-- info row -->
-                                <div class="row invoice-info">
+                                {{-- <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
                                         From
                                         <address>
@@ -104,8 +112,47 @@
                                         <b>Cuenta:</b> {{$pedido->user->id}}
                                     </div>
                                     <!-- /.col -->
-                                </div>
+                                </div> --}}
                                 <!-- /.row -->
+
+
+
+                                <div class="col-12 table-responsive">
+                                    <table >
+                                        <tbody>
+                                            <tr>
+                                                <td>From </td>
+                                                <td>To </td>
+                                                <td> Factura #{{$pedido->id}}j23</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Admin, Inc.</strong> </td>
+                                                <td> <strong>{{$pedido->nombre_completo}}</strong></td>
+                                                <td> </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 638 Gonzales Suarez Ave, Roma 109</td>
+                                                <td> {{$pedido->direccion}} , {{$pedido->detalle}} </td>
+                                                <td>Pedido:4F3{{$pedido->id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td> Cuenca, AZ 010107</td>
+                                                <td>{{$pedido->ciudad}}, {{$pedido->provincia}} {{$pedido->codigo_zip}}</td>
+                                                <td>Fecha compra:{{$pedido->fecha_creacion}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td> Telf: (+593) 0989969542</td>
+                                                <td>Telf: {{$pedido->telefono}} </td>
+                                                <td>ClienteID:{{$pedido->user->id}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td> Email: dispers.store@gmail.com</td>
+                                                <td> Email: {{$pedido->user->email}}</td>
+                                                <td> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 <!-- Table row -->
                                 <div class="row">
@@ -138,8 +185,9 @@
                                 <!-- /.row -->
 
                                 <div class="row">
-                                    <!-- accepted payments column -->
-                                    <div class="col-6">
+                                    
+                                    
+                                    {{-- <div class="col-6">
                                         <p class="lead">Payment Methods:</p>
 
 
@@ -156,7 +204,7 @@
                                             plugg
                                             dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
                                         </p>
-                                    </div>
+                                    </div> --}}
                                     <!-- /.col -->
                                     <div class="col-6">
                                         <p class="lead">Cantidad a pagar</p>
@@ -223,3 +271,4 @@
     }
 </script>
 </body>
+

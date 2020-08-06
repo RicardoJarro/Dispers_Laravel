@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\GeneralCategory;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Mail\TestMail;
 use App\Order;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 class PDFController extends Controller
 {
@@ -33,10 +35,22 @@ class PDFController extends Controller
     	return redirect()->back()->with('status', '¡PDF guardado correctamente!');
     }
 
-    public function PDFCategoriasHorizontal(Request $request){
+    public function pdf_catalogo(){
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $catalogo=GeneralCategory::with('categories.products.images')->get();
+       // $pdf=PDF::loadView('tienda.productos.catalogo',compact('catalogo'));
+
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('tienda.productos.catalogo',compact('catalogo'))->stream();
+        return $pdf->download('categoriashorizontal.pdf');
+
+        return redirect()->back()->with('status', '¡PDF guardado correctamente!');
+    }
+
+    public function PDFCategoriasHorizontal(Request $request,$id){
      
-     $pedido=Order::with('order_details.product')->find(1);
+     $pedido=Order::with('order_details.product')->find($id);
      $fecha=Carbon::now()->toDateTimeString();
+     $user=$pedido->user;
     //  $pdf = (\PDF::loadView('usuarios',compact('users')))->setPaper('a4','landscape');
         $pdf = (PDF::loadView('tienda.compra.factura_enviar',compact('pedido','fecha')))->setPaper('a4','landscape');
 
@@ -44,26 +58,29 @@ class PDFController extends Controller
     //  $pdf = PDF::loadView('admin.category.pdfcategoryhorizontal',compact('categorias'));
     
      //$usuario=$pedido->user;
-     $data["email"]=$request->get("juanc.lazol@ucuenca.edu.ec");
-     $data["client_name"]=$request->get("Juan");
+     $data["email"]=$request->get($user->email);
+     $data["client_name"]=$request->get($user->nombre);
      $data["subject"]=$request->get("Gracias por comprar");
 
-         Mail::send('welcome', $data, function($message)use($data,$pdf) {
-         $message->to("jaio1998619@gmail.com", "Juan")
+         Mail::send('welcome', $data, function($message)use($data,$pdf,$user) {
+         $message->to($user->email, $user->nombre)
          ->subject("Gracias por comprar ")
-         ->attachData($pdf->output(), "invoice.pdf");
+         ->attachData($pdf->output(), "Factura.pdf");
          });
     
      if (Mail::failures()) {
           $this->statusdesc  =   "Error sending mail";
           $this->statuscode  =   "0";
-
+          return redirect()->route('ver_compra',$id)->with('cancelar','Ocurrio un problema');
      }else{
 
         $this->statusdesc  =   "Message sent Succesfully";
         $this->statuscode  =   "1";
+        return redirect()->route('ver_compra',$id)->with('datos','Factura enviada');
      }
-     return response()->json(compact('this'));
+     
+     return redirect()->route('ver_compra',$id)->with('datos','Factura enviada');
+     
     //Mail::to('juandiego-271296@hotmail.es')->send(new TestMail());
 
     // return $pdf->setPaper('a4', 'landscape')->download('categoriashorizontal.pdf');

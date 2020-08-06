@@ -1,6 +1,7 @@
 <?php
 
 use App\Category;
+use App\GeneralCategory;
 use App\Product;
 use App\Image;
 use App\Order;
@@ -97,6 +98,7 @@ Route::post('/carrito_remover', 'Tienda\CarritoController@remover')->name('carri
 Route::post('/carrito_vaciar', 'Tienda\CarritoController@vaciar')->name('carrito.vaciar');
 Route::get('/registro','Tienda\UserController@ver_fomulario')->name('user.registro');
 Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('procesar_orden_post');
+Route::post('resgistro_usuario','Tienda\UserController@registrar')->name('registrar_usuario');
 
 
 
@@ -111,12 +113,21 @@ Route::post('/procesarPedido','Tienda\CarritoController@procesarPedido')->name('
 Route::get('/pedido','Tienda\CompraController@compra')->name('confirmar_comprar');
 
 Route::get('/prueba', function () {
-    $pedido=Order::with('order_details.product')->find(1);
-     $fecha=Carbon::now()->toDateTimeString();
-
-    return view('tienda.compra.factura_enviar',compact('pedido','fecha'));
+    $catalogo=GeneralCategory::with('categories.products.images')->get();
+    return view('tienda.productos.catalogo',compact('catalogo'));
+    //  $user=User::find(Auth::user()->id);
+    //  return $user;
+    
+    // return view('tienda.compra.factura_enviar',compact('pedido','fecha'));
 });
 
+Route::get('/prueba1', function () {
+    $catalogo=GeneralCategory::with('categories.products.images')->get();
+    return Product::get();
+    
+});
+
+Route::get('generar_catalogo','PDFController@pdf_catalogo')->name('gatalogo.productos');
 Route::get('/compra/{id}','Tienda\CompraController@ver_compra')->name('ver_compra');
 
 Route::get('compras','Tienda\CompraController@listar_compras')->name('ver_compras');
@@ -128,7 +139,7 @@ Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 /* ----PDF----- */
 Route::get('/pdf', 'PDFController@index')->name('descargarPDF');
 Route::get('/pdfcategorias', 'PDFController@PDFCategorias')->name('descargarPDFcategorias');
-Route::get('/pdfcategoriashorizontal', 'PDFController@PDFCategoriasHorizontal')->name('decargarPDFCategoriasHorizontal');
+Route::get('/{id}/enviar', 'PDFController@PDFCategoriasHorizontal')->name('enviar_factura');
 Route::get('/guardarpdf', 'PDFController@guardarpdf')->name('guardarpdf');  
 
 

@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('slug',50)->unique();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');          
-            $table->string('descripcion',255);
+            $table->string('descripcion',255)->nullable();
             $table->decimal('peso', 6, 2);
             $table->integer('stock');
             $table->decimal('precio', 6, 2);

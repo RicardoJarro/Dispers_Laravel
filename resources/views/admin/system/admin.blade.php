@@ -323,11 +323,15 @@
               </a>
             </li>
 
-
-
-
-
-
+            <li class="nav-item">
+              <a href="{{route('gatalogo.productos')}}" class="nav-link">
+                <i class="nav-icon fas fa-file-pdf"></i>
+                
+                <p>
+                  Generar Catalogo
+                </p>
+              </a>
+            </li>
 
             <li class="nav-header">Información</li>
 

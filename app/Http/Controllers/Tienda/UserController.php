@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tienda;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use App\User;
+use App\User;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $datos['users']=User::paginate(10);
-        return view('tienda.usuario.index',$datos);
+        $datos['users'] = User::paginate(10);
+        return view('tienda.usuario.index', $datos);
     }
 
     /**
@@ -38,7 +38,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $datosUsers=request()->except('_token');
+        return $request;
+        $datosUsers = request()->except('_token');
         User::insert($datosUsers);
         //retorna el login
         #return redirect('users')->with('Mensaje','Empleado agregado con exito');
@@ -63,8 +64,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user =User::findOrfail($id);
-        return view('users.edit',compact('user'));
+        $user = User::findOrfail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -76,11 +77,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosUsers=request()->except(['_token','_method']);
-        User::where('id','=',$id   )->update($datosUsers); 
+        $datosUsers = request()->except(['_token', '_method']);
+        User::where('id', '=', $id)->update($datosUsers);
         //$user= users::findOrfail($id);
         //return view('users.edit',compact('user'));
-        return redirect('users')->with('Mensaje','Empleado modificado con exito');
+        return redirect('users')->with('Mensaje', 'Empleado modificado con exito');
     }
 
     /**
@@ -91,55 +92,61 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::find($id);
-        $user->estado='no activo';
-        User::where('id','=',$id   )->update($user); 
-        return redirect('tienda.index')->with('Mensaje',"Usuario eliminado");
+        $user = User::find($id);
+        $user->estado = 'no activo';
+        User::where('id', '=', $id)->update($user);
+        return redirect('tienda.index')->with('Mensaje', "Usuario eliminado");
     }
 
-    public function verperfil(){
+    public function verperfil()
+    {
         $user = auth()->user();
-        return view('tienda.usuario.perfil')->with('user',$user);
+        return view('tienda.usuario.perfil')->with('user', $user);
     }
-    public function actualizar(Request $request){
+    public function actualizar(Request $request)
+    {
 
-        
 
-        if($request->atributo !='password'){
-            
+
+        if ($request->atributo != 'password') {
+
             User::where('id', $request->id)->update(array($request->atributo => $request->nuevo));
-            return redirect('/perfil')->with('datos','Usuario actualizado');
-        }else{
-            
-            if($request->password1 == $request->password2){
-                
-                $pass=bcrypt($request->password1);
-                User::where('id', $request->id)->update(array('password'=> $pass));
-                return redirect('/perfil')->with('datos','Usuario actualizado');
+            return redirect('/perfil')->with('datos', 'Usuario actualizado');
+        } else {
 
-            }else{
-                return redirect('/perfil')->with('datos','Las contraseñas no son iguales');
+            if ($request->password1 == $request->password2) {
+
+                $pass = bcrypt($request->password1);
+                User::where('id', $request->id)->update(array('password' => $pass));
+                return redirect('/perfil')->with('datos', 'Usuario actualizado');
+            } else {
+                return redirect('/perfil')->with('datos', 'Las contraseñas no son iguales');
             }
         }
-
     }
 
-    public function ver_fomulario(){
+    public function ver_fomulario()
+    {
         return view('tienda/usuario/registrar_usuarios');
     }
 
-    public function registrar(Request $request ){            
-        $pass=bcrypt($request->password);
-        $request->merge([
-            'password' => $pass,
-        ]);         
-        $slug=Str::slug($request->nickname);
-        $request->request->add(['slug' => $slug]);
-        
+    public function registrar(Request $request)
+    {
 
-        $datosUsers=request()->except(['_token','_method','confirm_password']);
-        User::insert($datosUsers);
-        return redirect('login')->with('datos','Usuario registrado');
+        try {
+            $pass = bcrypt($request->password);
+            $request->merge([
+                'password' => $pass,
+            ]);
+            $slug = Str::slug($request->nickname);
+            $request->request->add(['slug' => $slug]);
+
+
+            $datosUsers = request()->except(['_token', '_method', 'confirm_password']);
+            User::insert($datosUsers);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            dd($ex->getMessage());
+        }
+        return redirect('login')->with('datos', 'Usuario registrado');
     }
-
 }

@@ -8,6 +8,25 @@
 
 
 <div id="container-resumen-compra row">
+    <div class="col-12">
+        @if( session('datos') )
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ session('datos') }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+        @if( session('cancelar') )
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ session('cancelar') }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+    </div>
+
     <div class="row">
         <div id="titulo-detalle-compra" class="col-11">
             <br>
@@ -183,9 +202,9 @@
                                     <div class="col-12">
                                         {{-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
                                                 class="fas fa-print"></i> Print</a> --}}
-                                        <button type="button" class="btn btn-success float-right"><i
+                                        <a href="{{route('enviar_factura',$pedido->id)}}"  class="btn btn-success float-right"><i
                                                 class="far fa-credit-card"></i> Enviar a correo
-                                        </button>
+                                        </a>
                                         <button type="button" onclick="myFunction()" class="btn btn-primary float-right"
                                             style="margin-right: 5px;">
                                             <i class="fas fa-download"></i> Generar PDF

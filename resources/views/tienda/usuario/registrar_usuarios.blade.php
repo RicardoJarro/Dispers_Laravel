@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm"><br>
-            <form action="{{route('login_post')}}" class="form-horizontal" method="post">
+            <form action="{{route('registrar_usuario')}}" class="form-horizontal" method="post">
                 @csrf
                     <fieldset>
 
@@ -35,7 +35,8 @@
                                     class="form-control offset-md-5" required>
                             </div>
                         </div>
-
+                        <input id="fname" name="slug" type="hidden" placeholder="Ingrese su nombre"
+                        class="form-control offset-md-5" value="">
                         <div class="form-group">
                             <div class="col-md-7">
                                 <span class="col-md-0 offset-md-5">Nickname: </i></span>
