@@ -148,6 +148,8 @@ Route::get('compras','Tienda\CompraController@listar_compras')->name('ver_compra
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
   Route::get('/callback/{provider}', 'SocialController@callback');
 
+
+  
 /* ----PDF----- */
 Route::get('/pdf', 'PDFController@index')->name('descargarPDF');
 Route::get('/pdfcategorias', 'PDFController@PDFCategorias')->name('descargarPDFcategorias');

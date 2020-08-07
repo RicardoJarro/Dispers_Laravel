@@ -12,11 +12,13 @@
     <!-- Iconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
     @yield('estilos')
+
+
     <link href=" {!! asset('css/tienda/estilo_header_footer.css') !!}" rel="stylesheet">
-
     <link  rel="icon"  href="{!! asset('images/favicon.ico')!!}"/>
-
     <link rel="stylesheet" href="{!! asset('css/tienda/estilo_catalogo.css')!!}">
+
+    
     <script src="https://kit.fontawesome.com/63fafe2dae.js" crossorigin="anonymous"></script>
 
     

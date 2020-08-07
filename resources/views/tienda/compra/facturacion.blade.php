@@ -100,6 +100,7 @@
                 </div>
             </form>
         </div>
+        
         <div class="col col-12 col-sm-12 col-md-5 col-lg-5 border rounded" id="fact-container-derecho">
 
             <div class="mt-3 position-relative">
