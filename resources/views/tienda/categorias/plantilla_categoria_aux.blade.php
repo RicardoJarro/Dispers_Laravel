@@ -49,7 +49,7 @@
                             <img src="/images/admin/noImagen.png">
                             @endif                                                        
                             <div class="product-catalog-info">
-                                <p id="nombre">{{$item->nombre}}aqui</p>
+                                <p id="nombre">{{$item->nombre}}</p>
                             <p id="precio"> $ {{$item->precio}}</p>
                             </div>
                         </a>

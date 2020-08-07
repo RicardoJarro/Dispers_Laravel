@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dispers Home</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <title>Dispers</title>
+        <link  rel="icon"  href="{!! asset('images/favicon.ico')!!}"/>
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -47,7 +47,7 @@
 			
 			.nav li a:hover {
 				background-color:#434343;
-				color: yellow;
+				color: red;
 			}
 			
 			.nav li ul {
@@ -234,7 +234,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="images/admin/foto_riky.jpg" alt="" />
                             <h4>Ricardo Jarro</h4>
                             <p class="text-muted">Estudiante Universitario</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
@@ -244,7 +244,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="" />
+                            <img class="mx-auto rounded-circle" src="images/admin/foto_lazo.png" alt="" />
                             <h4>Carlos Lazo</h4>
                             <p class="text-muted">Estudiante Universitario</p>
                             <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>

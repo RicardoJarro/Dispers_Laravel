@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'nickname' => $name,
         'slug'=>Str::slug($name),
         'email' => $faker->unique()->safeEmail,
-        'admin'=>'si',
+        'admin'=>'no',
         'password' => bcrypt('1234'), // password
         'estado'=> 'activo',
     ];

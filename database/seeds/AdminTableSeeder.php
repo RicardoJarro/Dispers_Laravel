@@ -12,8 +12,7 @@ class AdminTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
+    {        
         DB::table('users')->insert([
             'nombre'=>'Ricardo Jarro',
             'nickname'=>'Rick619',

@@ -43,7 +43,7 @@
       </ul>
 
       <!-- Formulario busqueda -->
-      <form class="form-inline ml-3">
+      {{-- <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
           <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -52,10 +52,10 @@
             </button>
           </div>
         </div>
-      </form>
+      </form> --}}
 
       <!-- Barras de navegacion en ventana superior izquierda -->
-      <ul class="navbar-nav ml-auto">
+      {{-- <ul class="navbar-nav ml-auto">
         <!-- Menu notificaciones -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -84,7 +84,7 @@
           </a>
         </li>
 
-      </ul>
+      </ul> --}}
     </nav>
     <!-- /.navbar -->
 
@@ -336,7 +336,7 @@
             <li class="nav-header">Información</li>
 
             <li class="nav-item">
-              <a href="http://dispers.test/admin/acerca_de" class="nav-link">
+            <a href="{{route('acerca')}}" class="nav-link">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                   Acerca de

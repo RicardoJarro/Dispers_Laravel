@@ -134,6 +134,10 @@ class UserController extends Controller
     {
 
         try {
+            if($request->password != $request->confirm_password){
+                return redirect()->route('user.registro')->with('error', 'Las contraseñas no coinciden');
+            }
+
             $pass = bcrypt($request->password);
             $request->merge([
                 'password' => $pass,
@@ -143,11 +147,17 @@ class UserController extends Controller
 
 
             $datosUsers = request()->except(['_token', '_method', 'confirm_password']);
+
+                
+
+            
+
             User::insert($datosUsers);
+            return redirect()->route('login')->with('success', 'Usuario registrado');
         } catch (\Illuminate\Database\QueryException $ex) {
            
             return redirect()->route('user.registro')->with('error', 'El correo ya esta vincuado con otra cuenta');
         }
-        return redirect('login')->with('datos', 'Usuario registrado');
+        
     }
 }

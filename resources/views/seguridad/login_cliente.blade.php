@@ -12,11 +12,20 @@
 <div class="container">
     <div class="row">
         <div class="mx-auto">
+            <br>
+            @if( session('success') )
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <form class="formulario" action="{{route('login_post')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <h2>Inicio de sesión</h2>
-                    
+
                     @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -26,6 +35,8 @@
                             @endforeach
                         </div>
                     </div>
+
+                   
 
                     @endif
                     <div class="contenedor">
@@ -47,20 +58,22 @@
                             <input type="submit" value="Iniciar" class="button btn btn-danger">
                             {{-- <p><a href="">Olvido su contraseña</a></p> --}}
                             <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-        <p>¿No tienes una cuenta? <a class="link" href="{{route('user.registro')}}">Registrate </a></p>
+                            <p>¿No tienes una cuenta? <a class="link" href="{{route('user.registro')}}">Registrate </a>
+                            </p>
                     </div>
 
                     <hr>
 
 
                     <h5>Inicia sesión con tu cuenta de : </h5>
-                    <a href="{{ url('/auth/redirect/facebook') }}" >
-                    <div class="button-facebook">
-                        <i class="fab fa-facebook"></i>
-                         Facebook
-                        {{-- <input disabled=»disabled» type="button-fb" value="Facebook" class="button1"> --}}
-                    </div></a>
-                    
+                    <a href="{{ url('/auth/redirect/facebook') }}">
+                        <div class="button-facebook">
+                            <i class="fab fa-facebook"></i>
+                            Facebook
+                            {{-- <input disabled=»disabled» type="button-fb" value="Facebook" class="button1"> --}}
+                        </div>
+                    </a>
+
 
                     <br>
 
